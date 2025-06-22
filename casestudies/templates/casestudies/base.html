@@ -29,6 +29,11 @@
     <!-- Compiled Tailwind CSS -->
     <link rel="stylesheet" href="{% static 'css/output.css' %}">
     
+    <!-- Alpine.js x-cloak CSS -->
+    <style>
+        [x-cloak] { display: none !important; }
+    </style>
+    
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
 <body class="bg-white text-black" x-data="{ searchOpen: false, menuOpen: false }">
@@ -76,7 +81,7 @@
             </div>
             
             <!-- Mobile Menu -->
-            <nav x-show="menuOpen" x-transition class="sm:hidden mt-4" style="display: none;">
+            <nav x-show="menuOpen" x-cloak x-transition class="sm:hidden mt-4" style="display: none;">
                 <a href="{% url 'casestudies:home' %}" class="block py-2 px-4 text-sm hover:bg-gray-700 rounded
                     {% if request.resolver_match.url_name == 'home' %} bg-gray-700 {% endif %}
                 ">Home</a>
@@ -92,7 +97,7 @@
             </nav>
         </header>
     
-        <div x-show="searchOpen" x-transition style="display: none;" class="bg-white">
+        <div x-show="searchOpen" x-cloak x-transition style="display: none;" class="bg-white">
             <div class="container mx-auto p-4">
                 <form action="{% url 'casestudies:case_study_list' %}" method="get" class="flex">
                     <input type="text" name="q" placeholder="Search all case studies..." value="{{ query|default:'' }}"
