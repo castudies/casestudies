@@ -1,0 +1,97 @@
+{% extends 'casestudies/base.html' %}
+{% load static %}
+{% block title %}About - Case Studies{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<div class="bg-[#ffffff] mt-4 py-6 md:py-14 px-4 rounded-2xl max-w-6xl mx-auto mb-8">
+    <div class="text-center">
+        <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight mb-6">About CaseStudies</h1>
+        <p class="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto">
+            Empowering decision-makers with real-world case studies that drive better outcomes.
+        </p>
+    </div>
+</div>
+
+<!-- Mission Section -->
+<div class="max-w-4xl mx-auto mb-12">
+    <div class="bg-white rounded-lg border border-black p-8">
+        <h2 class="text-3xl font-bold mb-6">Our Mission</h2>
+        <p class="text-lg text-gray-700 mb-6 leading-relaxed">
+            We believe that the best learning comes from real-world examples. Our platform curates and presents 
+            data-driven case studies that help professionals, students, and decision-makers understand complex 
+            business challenges and their solutions.
+        </p>
+        <p class="text-lg text-gray-700 leading-relaxed">
+            By analyzing real cases with real outcomes, we provide insights that go beyond theory and 
+            into practical application.
+        </p>
+    </div>
+</div>
+
+<!-- What We Do Section -->
+<div class="max-w-4xl mx-auto mb-12">
+    <div class="bg-white rounded-lg border border-black p-8">
+        <h2 class="text-3xl font-bold mb-6 text-center">What We Do</h2>
+        <div class="space-y-6 text-lg text-gray-700">
+            <div>
+                <h3 class="text-xl font-bold mb-2 text-primary">Curate Cases</h3>
+                <p class="leading-relaxed">We carefully select and analyze real business cases from various industries and domains to provide a rich learning library.</p>
+            </div>
+            <div>
+                <h3 class="text-xl font-bold mb-2 text-primary">Analyze Impact</h3>
+                <p class="leading-relaxed">We break down complex decisions and their outcomes to extract actionable insights, helping you understand the "why" behind business strategies.</p>
+            </div>
+            <div>
+                <h3 class="text-xl font-bold mb-2 text-primary">Share Knowledge</h3>
+                <p class="leading-relaxed">We make these insights accessible to everyone, empowering you to make better, data-driven decisions in your own professional life.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Creator Section -->
+<div class="max-w-4xl mx-auto mb-12">
+    <div class="bg-white rounded-lg border border-black p-8">
+        <h2 class="text-3xl font-bold mb-6">Meet the Creator</h2>
+        <div class="flex flex-col md:flex-row items-center md:items-start gap-6">
+            <div class="text-center md:text-left">
+                <h3 class="text-2xl font-bold mb-2">Mushfikur Rahman Mahi</h3>
+                <p class="text-lg text-gray-700 mb-4">
+                    A passionate advocate for data-driven decision making and continuous learning. 
+                    This platform was created to share valuable insights from real-world business cases 
+                    and help others develop their analytical thinking skills.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="https://x.com/mushfikurahmaan" class="inline-flex items-center gap-2 bg-black text-white px-4 py-2 rounded-md hover:bg-gray-800 transition-colors" target="_blank">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path>
+                        </svg>
+                        Twitter
+                    </a>
+                    <a href="https://www.linkedin.com/in/mushfikrahman/" class="inline-flex items-center gap-2 bg-primary text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors" target="_blank">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                        LinkedIn
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Support Section -->
+<div class="max-w-4xl mx-auto">
+    <div class="bg-white rounded-lg border border-black p-8 text-center">
+        <h2 class="text-3xl font-bold mb-6">Support the Project</h2>
+        <p class="text-lg text-gray-700 mb-6">
+            If you find value in these case studies and want to support the continued development of this platform, 
+            consider buying me a coffee!
+        </p>
+        <a href="https://ko-fi.com/mushfikurahmaan" class="inline-block bg-white text-black rounded-full px-8 py-3 font-semibold border-2 border-black transition-all duration-200 hover:shadow-[4px_4px_0_0_#000] hover:-translate-y-1 hover:-translate-x-1">
+            ☕ Buy me a coffee
+        </a>
+    </div>
+</div>
+{% endblock %} 

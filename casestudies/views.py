@@ -25,3 +25,18 @@ def all_case_studies(request):
 def case_study_detail(request, slug):
     case_study = get_object_or_404(CaseStudy, slug=slug)
     return render(request, 'casestudies/detail.html', {'case_study': case_study})
+
+def about(request):
+    return render(request, 'casestudies/about.html')
+
+def terms_of_service(request):
+    return render(request, 'casestudies/terms.html')
+
+def privacy_policy(request):
+    return render(request, 'casestudies/privacy.html')
+
+def socials(request):
+    return render(request, 'casestudies/socials.html')
+
+def acknowledgements(request):
+    return render(request, 'casestudies/acknowledgements.html')

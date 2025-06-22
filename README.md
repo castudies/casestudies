@@ -1,64 +1,63 @@
-# Case Study Platform
+# CaseStudies
 
-A Django-based web application for creating and sharing interactive case studies with expert solutions.
+A Django-based platform for curating and presenting real-world business case studies to help professionals, students, and decision-makers understand complex business challenges and their solutions.
 
 ## Features
 
-- **Interactive Case Studies**: Create and share detailed case studies with background, data summary, tasks, and expert solutions
-- **Image Support**: Upload thumbnails and summary images with responsive display
-- **Difficulty Levels**: Categorize case studies by difficulty (Easy, Intermediate, Advanced)
-- **Domain Classification**: Organize case studies by domain/topic
-- **Solution Reveal**: Interactive solution reveal with confirmation modal
-- **Responsive Design**: Mobile-friendly interface with Tailwind CSS
-- **Admin Panel**: Easy content management through Django admin
+- **Case Study Library**: Browse and search through a curated collection of real business cases
+- **Search Functionality**: Discover case studies by title, domain, or difficulty level
+- **Responsive Design**: Modern, mobile-friendly interface built with Tailwind CSS
+- **About Page**: Learn about the platform's mission and creator
+- **Legal Pages**: Comprehensive Terms of Service and Privacy Policy
+
+## Pages
+
+### Main Pages
+- **Home** (`/`): Landing page with featured case studies
+- **Cases** (`/cases/`): Complete list of all case studies with search functionality
+- **Case Study Detail** (`/<slug>/`): Individual case study pages
+
+### Information Pages
+- **About** (`/about/`): Platform mission, creator information, and support options
+- **Terms of Service** (`/terms/`): Legal terms and conditions for using the platform
+- **Privacy Policy** (`/privacy/`): How we collect, use, and protect your information
 
 ## Technology Stack
 
-- **Backend**: Django 5.2.3
-- **Frontend**: HTML, Tailwind CSS, Alpine.js
+- **Backend**: Django 4.x
+- **Frontend**: Tailwind CSS, Alpine.js
 - **Database**: SQLite (default)
-- **Python**: 3.13.5
+- **Icons**: Heroicons (SVG)
+- **Fonts**: Epilogue (Google Fonts)
 
-## Installation
+## Design System
 
-1. **Clone the repository**
-   ```bash
-   git clone <repository-url>
-   cd casestudy
-   ```
+The website follows a consistent design pattern:
+- **Colors**: Black header with white text, white content areas with black text
+- **Typography**: Epilogue font family with various weights
+- **Layout**: Responsive grid system with rounded corners and borders
+- **Interactive Elements**: Hover effects with shadow and transform animations
+- **Primary Color**: #4285f2 (blue)
 
-2. **Create and activate virtual environment**
-   ```bash
-   python -m venv venv
-   # On Windows
-   venv\Scripts\activate
-   # On macOS/Linux
-   source venv/bin/activate
-   ```
+## Creator
 
-3. **Install dependencies**
-   ```bash
-   pip install -r requirements.txt
-   ```
+**Mushfikur Rahman Mahi**
+- Twitter: [@mushfikurahmaan](https://x.com/mushfikurahmaan)
+- LinkedIn: [mushfikrahman](https://www.linkedin.com/in/mushfikrahman/)
+- Support: [Buy me a coffee](https://ko-fi.com/mushfikurahmaan)
 
-4. **Run migrations**
-   ```bash
-   python manage.py migrate
-   ```
+## Getting Started
 
-5. **Create superuser (optional)**
-   ```bash
-   python manage.py createsuperuser
-   ```
+1. Clone the repository
+2. Install dependencies: `pip install -r requirements.txt`
+3. Run migrations: `python manage.py migrate`
+4. Create a superuser: `python manage.py createsuperuser`
+5. Run the development server: `python manage.py runserver`
+6. Visit `http://localhost:8000`
 
-6. **Run the development server**
-   ```bash
-   python manage.py runserver
-   ```
+## License
 
-7. **Access the application**
-   - Main site: http://127.0.0.1:8000/
-   - Admin panel: http://127.0.0.1:8000/admin/
+This project is for educational and informational purposes. Please refer to the Terms of Service and Privacy Policy for detailed usage guidelines.
 
 ## Project Structure
 
