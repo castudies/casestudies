@@ -25,24 +25,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;700;800&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Compiled Tailwind CSS -->
+    <link rel="stylesheet" href="{% static 'css/output.css' %}">
+    
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <script>
-        tailwind.config = {
-          theme: {
-            extend: {
-              colors: {
-                primary: '#4285f2',
-              }
-            }
-          }
-        }
-    </script>
-    <style>
-        body {
-            font-family: 'Epilogue', sans-serif;
-        }
-    </style>
 </head>
 <body class="bg-white text-black" x-data="{ searchOpen: false, menuOpen: false }">
 
@@ -105,7 +92,7 @@
             </nav>
         </header>
     
-        <div x-show="searchOpen" x-transition style="display: none;" class="bg-white border-b border-gray-200">
+        <div x-show="searchOpen" x-transition style="display: none;" class="bg-white">
             <div class="container mx-auto p-4">
                 <form action="{% url 'casestudies:case_study_list' %}" method="get" class="flex">
                     <input type="text" name="q" placeholder="Search all case studies..." value="{{ query|default:'' }}"

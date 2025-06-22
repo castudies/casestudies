@@ -49,11 +49,37 @@ The website follows a consistent design pattern:
 ## Getting Started
 
 1. Clone the repository
-2. Install dependencies: `pip install -r requirements.txt`
-3. Run migrations: `python manage.py migrate`
-4. Create a superuser: `python manage.py createsuperuser`
-5. Run the development server: `python manage.py runserver`
-6. Visit `http://localhost:8000`
+2. Install Python dependencies: `pip install -r requirements.txt`
+3. Install Node.js dependencies: `npm install`
+4. Build Tailwind CSS: `npm run build-prod`
+5. Run migrations: `python manage.py migrate`
+6. Create a superuser: `python manage.py createsuperuser`
+7. Run the development server: `python manage.py runserver`
+8. Visit `http://localhost:8000`
+
+## CSS Build Process
+
+This project uses Tailwind CSS with a proper build process instead of the CDN version for production.
+
+### Development
+- **Watch mode**: `npm run build` (rebuilds on file changes)
+- **One-time build**: `npm run build-prod` (minified for production)
+- **Windows batch files**: Use `build.bat` or `build-prod.bat`
+
+### File Structure
+```
+assets/
+├── css/
+│   ├── input.css      # Source CSS with Tailwind directives
+│   └── output.css     # Compiled CSS (generated)
+├── tailwind.config.js # Tailwind configuration
+└── package.json       # Node.js dependencies
+```
+
+### Customization
+- Modify `assets/css/input.css` to add custom styles
+- Update `tailwind.config.js` for theme customization
+- Rebuild CSS after changes: `npm run build-prod`
 
 ## License
 

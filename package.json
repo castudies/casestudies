@@ -1,0 +1,12 @@
+{
+  "name": "casestudy",
+  "version": "1.0.0",
+  "description": "Case Studies Django Project",
+  "scripts": {
+    "build": "tailwindcss -i ./assets/css/input.css -o ./assets/css/output.css --watch",
+    "build-prod": "tailwindcss -i ./assets/css/input.css -o ./assets/css/output.css --minify"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.0"
+  }
+} 
