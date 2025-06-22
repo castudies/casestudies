@@ -1,0 +1,72 @@
+{% extends 'casestudies/base.html' %}
+{% load static %}
+{% block title %}Case Studies{% endblock %}
+
+{% block content %}
+<div class="bg-[#ffffff] mt-4 py-6 md:py-14 px-4 rounded-2xl max-w-6xl mx-auto mb-4 md:mb-10">
+    <div class="flex flex-col md:flex-row items-center md:items-stretch justify-between gap-8">
+        <!-- Left: Hero Text -->
+        <div class="flex-1 flex flex-col justify-center text-left md:pr-8">
+            <h1 class="text-5xl md:text-6xl font-extrabold tracking-tight mb-6 leading-tight">Real Cases. Real Decisions. Real Impact.</h1>
+            <p class="text-xl md:text-2xl text-gray-600 max-w-xl mb-10">
+                Dive into data-driven case studies that sharpen your thinking and decision-making.
+            </p>
+            <div>
+                <a href="{% url 'casestudies:case_study_list' %}" class="bg-black text-white px-8 py-4 rounded-md font-semibold text-lg hover:bg-gray-800 transition-colors">
+                    Explore Cases
+                </a>
+            </div>
+        </div>
+        <!-- Right: Animation -->
+        <div class="flex-1 items-center justify-end ml-auto hidden md:flex">
+            <video class="w-full max-w-md rounded-xl" autoplay loop muted playsinline>
+                <source src="{% static 'Nf5FNdC3wTKp9KRzr5.mp4' %}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </div>
+</div>
+
+<div class="max-w-6xl mx-auto py-4 md:py-8" id="case-studies-section">
+    <div class="flex justify-center mb-8">
+        <span class="inline-flex items-center gap-2 bg-pink-100 text-pink-700 rounded-full px-5 py-2 font-semibold text-lg shadow">
+            <img src="{% static 'notification.png' %}" alt="Notification" class="w-5 h-5">
+            Latest Case Studies
+        </span>
+    </div>
+
+    <div style="--gap: 24px; --columns: 3;" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {% for case_study in case_studies %}
+        <a href="{% url 'casestudies:case_study_detail' case_study.slug %}"
+           class="block bg-white rounded-lg border border-black overflow-hidden 
+                  transition-all duration-200 ease-in-out
+                  hover:shadow-[8px_8px_0_0_#000] hover:-translate-y-1 hover:-translate-x-1">
+            
+            {% if case_study.thumbnail %}
+            <div class="w-full h-40 bg-gray-200 border-b border-black">
+                <img src="{{ case_study.thumbnail.url }}" alt="{{ case_study.title }}" 
+                     class="w-full h-full object-cover">
+            </div>
+            {% endif %}
+
+            <div class="p-5">
+                <div class="flex items-center gap-2 mb-3">
+                    <span class="inline-block bg-pink-100 text-pink-700 text-xs font-semibold px-2.5 py-1 rounded-full">{{ case_study.difficulty }}</span>
+                    <span class="inline-block bg-blue-100 text-primary text-xs font-semibold px-2.5 py-1 rounded-full">{{ case_study.domain }}</span>
+                </div>
+                <h2 class="text-xl font-bold mb-3">{{ case_study.title }}</h2>
+                {% if case_study.short_description %}
+                <p class="text-gray-700 mb-4">{{ case_study.short_description }}</p>
+                {% endif %}
+                <p class="text-gray-500 text-sm">{{ case_study.created_at|date:"F j, Y" }}</p>
+            </div>
+        </a>
+        {% empty %}
+        <div class="col-span-full text-center py-12">
+            <p class="text-gray-500 text-lg">No case studies available yet.</p>
+            <p class="text-gray-400 mt-2">Add your first one in the admin panel!</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %} 

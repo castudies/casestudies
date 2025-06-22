@@ -1,0 +1,154 @@
+{% extends 'casestudies/base.html' %}
+{% load static %}
+
+{% block title %}Case - {{ case_study.title }}{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto py-8" x-data="{ solutionVisible: false, imageModal: { visible: false, src: '', alt: '' }, confirmModal: false }">
+
+    <!-- Image Modal -->
+    <div x-show="imageModal.visible" 
+         x-transition:enter="transition ease-out duration-300"
+         x-transition:enter-start="opacity-0"
+         x-transition:enter-end="opacity-100"
+         x-transition:leave="transition ease-in duration-200"
+         x-transition:leave-start="opacity-100"
+         x-transition:leave-end="opacity-0"
+         class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75"
+         @click="imageModal.visible = false">
+        <div class="relative max-w-4xl max-h-full p-4">
+            <img :src="imageModal.src" :alt="imageModal.alt" class="max-w-full max-h-full object-contain rounded-lg">
+            <button @click="imageModal.visible = false" 
+                    class="absolute top-2 right-2 text-white bg-black bg-opacity-50 rounded-full p-2 hover:bg-opacity-75">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Confirm Solution Modal -->
+    <div x-show="confirmModal" 
+         x-transition:enter="transition ease-out duration-300"
+         x-transition:enter-start="opacity-0"
+         x-transition:enter-end="opacity-100"
+         x-transition:leave="transition ease-in duration-200"
+         x-transition:leave-start="opacity-100"
+         x-transition:leave-end="opacity-0"
+         class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75"
+         @click="confirmModal = false">
+        <div class="bg-white rounded-lg p-6 max-w-sm mx-4 shadow-xl" @click.stop>
+            <div class="text-center">
+                <div class="mx-auto flex items-center justify-center h-10 w-10 rounded-full bg-yellow-100 mb-3">
+                    <svg class="h-5 w-5 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+                    </svg>
+                </div>
+                <h3 class="text-base font-semibold text-gray-900 mb-2">Reveal Solution?</h3>
+                <p class="text-sm text-gray-500 mb-4">Are you sure you want to reveal the expert solution?</p>
+                <div class="flex gap-2 justify-center">
+                    <button @click="confirmModal = false" 
+                            class="px-3 py-2 text-sm font-medium text-gray-700 bg-gray-100 border border-gray-300 rounded-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+                        Cancel
+                    </button>
+                    <button @click="solutionVisible = true; confirmModal = false" 
+                            class="px-3 py-2 text-sm font-medium text-white bg-black border border-transparent rounded-md hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black">
+                        Reveal
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Back Button -->
+    <div class="mb-8">
+        <a href="{% url 'casestudies:case_study_list' %}" class="inline-flex items-center text-gray-500 hover:text-black font-semibold text-sm">
+            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+            All Case Studies
+        </a>
+    </div>
+
+    <!-- Header -->
+    <div class="mb-8">
+        <div class="flex items-center gap-2 mb-4">
+            <span class="inline-block bg-pink-100 text-pink-700 text-xs font-semibold px-2.5 py-1 rounded-full">{{ case_study.difficulty }}</span>
+            <span class="inline-block bg-blue-100 text-primary text-xs font-semibold px-2.5 py-1 rounded-full">{{ case_study.domain }}</span>
+        </div>
+        <h1 class="text-4xl md:text-5xl font-extrabold mb-2 leading-tight tracking-tight">{{ case_study.title }}</h1>
+        <p class="text-gray-500 text-sm">{{ case_study.created_at|date:"F j, Y" }}</p>
+    </div>
+
+    {% if case_study.thumbnail %}
+        <div class="mb-12 p-2 border-2 border-black rounded-lg">
+            <img src="{{ case_study.thumbnail.url }}" alt="{{ case_study.title }}" class="w-full max-h-[350px] object-cover rounded-md">
+        </div>
+    {% endif %}
+
+    <!-- Case Study Body -->
+    <div class="space-y-16">
+        <div>
+            <h2 class="text-2xl font-bold tracking-tight text-gray-800 mb-4">Case Background</h2>
+            <div class="prose max-w-none text-gray-700">
+                {{ case_study.case_background|linebreaks }}
+            </div>
+        </div>
+        
+        <div>
+            <h2 class="text-2xl font-bold tracking-tight text-gray-800 mb-4">Data Summary</h2>
+            <div class="prose max-w-none text-gray-700 mb-4">
+                {{ case_study.data_summary|linebreaks }}
+            </div>
+            {% if case_study.summary_image1 or case_study.summary_image2 %}
+                <div class="flex flex-col sm:flex-row flex-wrap gap-4">
+                    {% if case_study.summary_image1 %}
+                        <div class="flex-1 min-w-0">
+                            <img src="{{ case_study.summary_image1.url }}" 
+                                 alt="Summary Image 1" 
+                                 class="w-full h-auto max-w-sm max-h-64 object-contain rounded-md border border-gray-300 cursor-pointer hover:opacity-80 transition-opacity"
+                                 @click="imageModal = { visible: true, src: '{{ case_study.summary_image1.url }}', alt: 'Summary Image 1' }">
+                        </div>
+                    {% endif %}
+                    {% if case_study.summary_image2 %}
+                        <div class="flex-1 min-w-0">
+                            <img src="{{ case_study.summary_image2.url }}" 
+                                 alt="Summary Image 2" 
+                                 class="w-full h-auto max-w-sm max-h-64 object-contain rounded-md border border-gray-300 cursor-pointer hover:opacity-80 transition-opacity"
+                                 @click="imageModal = { visible: true, src: '{{ case_study.summary_image2.url }}', alt: 'Summary Image 2' }">
+                        </div>
+                    {% endif %}
+                </div>
+            {% endif %}
+        </div>
+
+        <div>
+            <h2 class="text-2xl font-bold tracking-tight text-gray-800 mb-4">Your Task</h2>
+            <div class="p-8 bg-pink-50 border-2 border-pink-200 rounded-lg">
+                <p class="prose max-w-none text-lg text-gray-800">
+                    {{ case_study.task|linebreaks }}
+                </p>
+            </div>
+        </div>
+
+        <div>
+            <button 
+                @click="if(solutionVisible) { 
+                            solutionVisible = false 
+                        } else { 
+                            confirmModal = true 
+                        }" 
+                class="w-full flex items-center justify-center gap-2 bg-black text-white font-bold py-4 px-6 rounded-lg hover:bg-gray-800 transition-all">
+                <span x-show="!solutionVisible">Reveal Solution</span>
+                <span x-show="solutionVisible">Hide Solution</span>
+                <svg x-show="!solutionVisible" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                <svg x-show="solutionVisible" style="display: none;" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.542-7 1.274-4.057 5.064-7 9.542-7 1.855 0 3.597.542 5.074 1.483l-1.057.942m-4.502 4.502a3 3 0 00-4.242 0 3 3 0 000 4.242M19.5 19.5L4.5 4.5"></path></svg>
+            </button>
+            <div x-show="solutionVisible" style="display: none;" x-transition class="mt-6 p-8 border-2 border-black rounded-lg bg-green-50">
+                <h2 class="text-3xl font-bold mb-4">Expert Solution</h2>
+                <div class="prose max-w-none text-lg">
+                    {{ case_study.expert_solution|linebreaks }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 
