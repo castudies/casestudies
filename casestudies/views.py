@@ -10,15 +10,29 @@ def home(request):
     return render(request, 'casestudies/index.html', context)
 
 def all_case_studies(request):
-    query = request.GET.get('q')
-    if query:
-        studies = CaseStudy.objects.filter(title__icontains=query)
-    else:
-        studies = CaseStudy.objects.all().order_by('-created_at')
+    studies = CaseStudy.objects.all().order_by('-created_at')
     
+    query = request.GET.get('q')
+    difficulty = request.GET.get('difficulty')
+    domain = request.GET.get('domain')
+
+    if query:
+        studies = studies.filter(
+            Q(title__icontains=query) | 
+            Q(case_background__icontains=query)
+        )
+    
+    if difficulty:
+        studies = studies.filter(difficulty=difficulty)
+        
+    if domain:
+        studies = studies.filter(domain__iexact=domain)
+
     context = {
         'case_studies': studies,
         'query': query,
+        'selected_difficulty': difficulty,
+        'selected_domain': domain,
     }
     return render(request, 'casestudies/cases.html', context)
 

@@ -3,14 +3,14 @@ from .models import CaseStudy
 
 @admin.register(CaseStudy)
 class CaseStudyAdmin(admin.ModelAdmin):
-    list_display = ('title', 'difficulty', 'domain', 'created_at')
-    list_filter = ('difficulty', 'domain')
-    search_fields = ('title', 'case_background', 'domain')
+    list_display = ('title', 'author', 'difficulty', 'domain', 'created_at')
+    list_filter = ('difficulty', 'domain',)
+    search_fields = ('title', 'author', 'case_background', 'domain')
     prepopulated_fields = {'slug': ('title',)}
     
     fieldsets = (
         (None, {
-            'fields': ('title', 'slug', 'thumbnail')
+            'fields': ('title', 'author', 'slug', 'thumbnail')
         }),
         ('Case Details', {
             'fields': ('difficulty', 'domain', 'case_background', 'data_summary', 'dataset', 'task')
