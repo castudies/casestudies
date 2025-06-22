@@ -13,7 +13,7 @@ class CaseStudyAdmin(admin.ModelAdmin):
             'fields': ('title', 'slug', 'thumbnail')
         }),
         ('Case Details', {
-            'fields': ('difficulty', 'domain', 'case_background', 'data_summary', 'task', 'summary_image1', 'summary_image2')
+            'fields': ('difficulty', 'domain', 'case_background', 'data_summary', 'dataset', 'task')
         }),
         ('Expert Solution', {
             'classes': ('collapse',),

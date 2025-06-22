@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.text import slugify
+import os
 
 # Create your models here.
 
@@ -18,15 +19,18 @@ class CaseStudy(models.Model):
     
     case_background = models.TextField(blank=True)
     data_summary = models.TextField(blank=True)
+    dataset = models.FileField(upload_to='datasets/', blank=True, null=True, help_text="Upload the dataset file (CSV, Excel, etc.)")
     task = models.TextField(blank=True)
     expert_solution = models.TextField(blank=True)
-    loves = models.IntegerField(default=0)
 
     created_at = models.DateTimeField(auto_now_add=True)
     slug = models.SlugField(unique=True, blank=True)
 
-    summary_image1 = models.ImageField(upload_to='summary_images/', blank=True, null=True, help_text="Recommended size: 384x256px (3:2 or 4:3 aspect ratio). Larger images will be scaled down.")
-    summary_image2 = models.ImageField(upload_to='summary_images/', blank=True, null=True, help_text="Recommended size: 384x256px (3:2 or 4:3 aspect ratio). Larger images will be scaled down.")
+    @property
+    def dataset_filename(self):
+        if self.dataset:
+            return os.path.basename(self.dataset.name)
+        return ''
 
     def save(self, *args, **kwargs):
         if not self.slug:

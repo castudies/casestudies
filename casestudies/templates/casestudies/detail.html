@@ -78,12 +78,6 @@
         <p class="text-gray-500 text-sm">{{ case_study.created_at|date:"F j, Y" }}</p>
     </div>
 
-    {% if case_study.thumbnail %}
-        <div class="mb-12 p-2 border-2 border-black rounded-lg">
-            <img src="{{ case_study.thumbnail.url }}" alt="{{ case_study.title }}" class="w-full max-h-[350px] object-cover rounded-md">
-        </div>
-    {% endif %}
-
     <!-- Case Study Body -->
     <div class="space-y-16">
         <div>
@@ -98,24 +92,17 @@
             <div class="prose max-w-none text-gray-700 mb-4">
                 {{ case_study.data_summary|linebreaks }}
             </div>
-            {% if case_study.summary_image1 or case_study.summary_image2 %}
-                <div class="flex flex-col sm:flex-row flex-wrap gap-4">
-                    {% if case_study.summary_image1 %}
-                        <div class="flex-1 min-w-0">
-                            <img src="{{ case_study.summary_image1.url }}" 
-                                 alt="Summary Image 1" 
-                                 class="w-full h-auto max-w-sm max-h-64 object-contain rounded-md border border-gray-300 cursor-pointer hover:opacity-80 transition-opacity"
-                                 @click="imageModal = { visible: true, src: '{{ case_study.summary_image1.url }}', alt: 'Summary Image 1' }">
-                        </div>
-                    {% endif %}
-                    {% if case_study.summary_image2 %}
-                        <div class="flex-1 min-w-0">
-                            <img src="{{ case_study.summary_image2.url }}" 
-                                 alt="Summary Image 2" 
-                                 class="w-full h-auto max-w-sm max-h-64 object-contain rounded-md border border-gray-300 cursor-pointer hover:opacity-80 transition-opacity"
-                                 @click="imageModal = { visible: true, src: '{{ case_study.summary_image2.url }}', alt: 'Summary Image 2' }">
-                        </div>
-                    {% endif %}
+            {% if case_study.dataset %}
+                <div class="mt-4 flex items-center">
+                    <a href="{{ case_study.dataset.url }}" 
+                       download
+                       class="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium underline hover:no-underline transition-all">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                        </svg>
+                        Download Dataset
+                    </a>
+                    <span class="text-sm text-gray-500 ml-2">({{ case_study.dataset_filename }})</span>
                 </div>
             {% endif %}
         </div>
