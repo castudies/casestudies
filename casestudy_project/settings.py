@@ -205,8 +205,14 @@ SERVER_EMAIL = EMAIL_HOST_USER
 ADMINS = [(os.environ.get('ADMIN_NAME', 'Mushfikur Rahman'), os.environ.get('ADMIN_EMAIL', 'mushfikurahmaan@gmail.com'))]
 
 # Whitenoise settings
+
+
+# Production security settings
 if not DEBUG:
-    # Only use these in production
+    # Trust 'X-Forwarded-Proto' header from Railway proxy
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+    # Enable security features
     SECURE_HSTS_SECONDS = 31536000
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
     SECURE_SSL_REDIRECT = True
