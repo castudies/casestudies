@@ -79,3 +79,6 @@ def socials(request):
 
 def acknowledgements(request):
     return render(request, 'casestudies/acknowledgements.html')
+
+def custom_404(request, exception):
+    return render(request, 'casestudies/404.html', status=404)
