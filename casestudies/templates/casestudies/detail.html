@@ -4,7 +4,7 @@
 {% block title %}Case - {{ case_study.title }}{% endblock %}
 
 {% block meta_description %}
-<meta name="description" content="{{ case_study.summary|default:case_study.case_background|truncatechars:160|default:'Read this real-world case study on Casestudies.' }}" />
+<meta name="description" content="{{ case_study.case_background|truncatechars:160|default:'Read this real-world case study on Casestudies.' }}" />
 {% endblock %}
 
 {% block canonical_url %}
@@ -13,13 +13,13 @@
 
 {% block social_meta %}
 <meta property="og:title" content="{{ case_study.title|default:'Case Study' }} - Casestudies" />
-<meta property="og:description" content="{{ case_study.summary|default:case_study.case_background|truncatechars:160|default:'Read this real-world case study on Casestudies.' }}" />
+<meta property="og:description" content="{{ case_study.case_background|truncatechars:160|default:'Read this real-world case study on Casestudies.' }}" />
 <meta property="og:image" content="{% if case_study.thumbnail %}{{ request.scheme }}://{{ request.get_host }}{{ case_study.thumbnail.url }}{% else %}{{ request.scheme }}://{{ request.get_host }}{% static 'favicon/android-chrome-512x512.png' %}{% endif %}" />
 <meta property="og:url" content="{{ request.build_absolute_uri|default:'' }}" />
 <meta property="og:type" content="article" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="{{ case_study.title|default:'Case Study' }} - Casestudies" />
-<meta name="twitter:description" content="{{ case_study.summary|default:case_study.case_background|truncatechars:160|default:'Read this real-world case study on Casestudies.' }}" />
+<meta name="twitter:description" content="{{ case_study.case_background|truncatechars:160|default:'Read this real-world case study on Casestudies.' }}" />
 <meta name="twitter:image" content="{% if case_study.thumbnail %}{{ request.scheme }}://{{ request.get_host }}{{ case_study.thumbnail.url }}{% else %}{{ request.scheme }}://{{ request.get_host }}{% static 'favicon/android-chrome-512x512.png' %}{% endif %}" />
 {% endblock %}
 

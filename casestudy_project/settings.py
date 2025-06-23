@@ -168,3 +168,24 @@ LOGGING = {
         },
     },
 }
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'unidentifiedindividual.exe@gmail.com'  # Your Gmail address
+EMAIL_HOST_PASSWORD = 'pbxp ysal pyer vlnj'  # Gmail app password (explained below)
+SERVER_EMAIL = EMAIL_HOST_USER
+
+ADMINS = [('Mushfikur Rahman', 'mushfikurahmaan@gmail.com')]  # Who will receive error emails
+
+
+if not DEBUG:
+    # Only use these in production
+    SECURE_HSTS_SECONDS = 31536000
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_SSL_REDIRECT = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    X_FRAME_OPTIONS = 'DENY'
