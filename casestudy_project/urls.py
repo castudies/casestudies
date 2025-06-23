@@ -20,6 +20,10 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.http import HttpResponseNotFound
 from django.shortcuts import render
+from django.contrib.sitemaps.views import sitemap
+from django.contrib.sitemaps import GenericSitemap
+from django.views.static import serve
+from casestudies.models import CaseStudy
 
 urlpatterns = [
     path("63f4ul7/", admin.site.urls),
@@ -30,6 +34,14 @@ urlpatterns = [
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
+sitemaps = {
+    'cases': GenericSitemap({'queryset': CaseStudy.objects.all(), 'date_field': 'created_at'}, priority=0.8),
+}
+
+urlpatterns += [
+    path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
+    path('robots.txt', serve, {'path': 'robots.txt', 'document_root': settings.BASE_DIR}),
+]
 
 # Custom 404 handler
 handler404 = 'casestudies.views.custom_404'

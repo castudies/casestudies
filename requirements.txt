@@ -2,3 +2,4 @@ Django==5.2.3
 Pillow==11.2.1
 python-decouple==3.8
 # No extra logging package needed; uses Python's built-in logging 
+django.contrib.sitemaps 
