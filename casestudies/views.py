@@ -46,7 +46,21 @@ def all_case_studies(request):
 
 def case_study_detail(request, slug):
     case_study = get_object_or_404(CaseStudy, slug=slug)
-    return render(request, 'casestudies/detail.html', {'case_study': case_study})
+    tags_list = []
+    if case_study.tags:
+        tags_list = [tag.strip() for tag in case_study.tags.split(',') if tag.strip()]
+    tag_colors = [
+        "bg-pink-100", "bg-blue-100", "bg-yellow-100", "bg-green-100",
+        "bg-purple-100", "bg-red-100", "bg-indigo-100"
+    ]
+    tag_color_pairs = [
+        (tag, tag_colors[i % len(tag_colors)]) for i, tag in enumerate(tags_list)
+    ]
+    return render(
+        request,
+        'casestudies/detail.html',
+        {'case_study': case_study, 'tag_color_pairs': tag_color_pairs}
+    )
 
 def about(request):
     return render(request, 'casestudies/about.html')

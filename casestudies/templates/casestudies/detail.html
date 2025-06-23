@@ -77,7 +77,7 @@
             <a href="{% url 'casestudies:case_study_list' %}?domain={{ case_study.domain }}" class="inline-block bg-blue-100 text-primary text-xs font-semibold px-2.5 py-1 rounded-full hover:bg-blue-200 transition-colors">{{ case_study.domain }}</a>
         </div>
         <h1 class="text-4xl md:text-5xl font-extrabold mb-2 leading-tight tracking-tight">{{ case_study.title }}</h1>
-        <div class="flex items-center text-sm text-gray-500">
+        <div class="flex flex-wrap items-center text-sm text-gray-500">
             <span>{{ case_study.created_at|date:"F j, Y" }}</span>
             {% if case_study.author %}
                 <span class="ml-4">Publisher- 
@@ -90,7 +90,23 @@
                     {% endif %}
                 </span>
             {% endif %}
+            {% if tag_color_pairs %}
+                <!-- Desktop: tags on right -->
+                <div class="hidden md:flex flex-wrap gap-2 ml-auto">
+                    {% for tag, color in tag_color_pairs %}
+                        <span class="inline-block {{ color }} text-gray-700 text-xs font-semibold px-2.5 py-1 rounded-full">{{ tag }}</span>
+                    {% endfor %}
+                </div>
+            {% endif %}
         </div>
+        {% if tag_color_pairs %}
+            <!-- Mobile: tags below date/author -->
+            <div class="flex flex-wrap gap-2 mt-4 md:hidden justify-end">
+                {% for tag, color in tag_color_pairs %}
+                    <span class="inline-block {{ color }} text-gray-700 text-xs font-semibold px-2.5 py-1 rounded-full">{{ tag }}</span>
+                {% endfor %}
+            </div>
+        {% endif %}
     </div>
 
     {% if case_study.thumbnail %}
