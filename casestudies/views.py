@@ -16,9 +16,9 @@ def all_case_studies(request):
     difficulty = request.GET.get('difficulty')
     domain = request.GET.get('domain')
     tags = request.GET.get('tags')
-
+# Pyright: this is a valid Django Q expression, safe to ignore the warning
     if query:
-        studies = studies.filter(
+        studies = studies.filter(   
             Q(title__icontains=query) | 
             Q(case_background__icontains=query) |
             Q(tags__icontains=query) |

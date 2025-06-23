@@ -1,8 +1,12 @@
 from django.db import models
+from typing import TYPE_CHECKING, ClassVar
 from django.utils.text import slugify
 import os
 
 # Create your models here.
+if TYPE_CHECKING:
+    from django.db.models.manager import Manager
+
 
 class CaseStudy(models.Model):
     DIFFICULTY_CHOICES = [
@@ -28,11 +32,14 @@ class CaseStudy(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
     slug = models.SlugField(unique=True, blank=True)
+    
+    if TYPE_CHECKING:
+        objects: ClassVar[Manager] 
 
     @property
     def dataset_filename(self):
         if self.dataset:
-            return os.path.basename(self.dataset.name)
+            return os.path.basename(str(self.dataset.name))
         return ''
 
     def save(self, *args, **kwargs):
