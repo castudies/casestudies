@@ -5,10 +5,10 @@
 {% block content %}
 <div class="max-w-6xl mx-auto py-8" id="case-studies-section">
     <div class="flex justify-center mb-8">
-        <span class="inline-flex items-center gap-2" style="background:rgba(66,133,242,0.12); color:#4285f2; border-radius:9999px; padding:0.5rem 1.25rem; font-weight:600; font-size:1.125rem; box-shadow:0 1px 4px 0 rgba(66,133,242,0.08);">
-            <img src="{% static 'case.png' %}" alt="Case Study" class="w-5 h-5">
-            All Case Studies
-        </span>
+        <div class="inline-flex flex-wrap items-center justify-center gap-2 bg-blue-100 text-primary rounded-full px-3 py-2 md:px-5 md:py-2 font-semibold text-base md:text-2xl shadow">
+            <img src="{% static 'file-case.png' %}" alt="Case Study" class="w-4 h-4 md:w-8 md:h-8">
+            <span class="text-center">All Case Studies</span>
+        </div>
     </div>
     {% if query %}
         <h1 class="text-3xl font-bold mb-8">Search results for: <span class="text-pink-500">"{{ query }}"</span></h1>

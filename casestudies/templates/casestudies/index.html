@@ -27,12 +27,83 @@
     </div>
 </div>
 
+<!-- Built by Analysts Section -->
+<div class="bg-white-50 py-12 md:py-16 px-4 rounded-2xl max-w-6xl mx-auto mb-8">
+    <div class="text-center max-w-4xl mx-auto">
+        <div class="inline-flex flex-wrap items-center justify-center gap-2 bg-pink-100 text-pink-700 rounded-full px-3 py-2 md:px-5 md:py-2 font-semibold text-base md:text-2xl shadow">
+            <img src="{% static 'budget-analyst.png' %}" alt="Notification" class="w-4 h-4 md:w-8 md:h-8">
+            <span class="text-center">Built by Analysts, for Analysts</span>
+        </div>
+        <div class="w-16 h-1 bg-white mx-auto mb-8"></div>
+        <p class="text-lg md:text-xl text-gray-700 leading-relaxed">
+            This platform was built by data analysts frustrated by theory-heavy courses. Our goal? Real-world business problems, with data that's messy, incomplete, and meaningful. Every case study here mimics real situations analysts face in the wild.
+        </p>
+    </div>
+</div>
+
+<!-- Skills Section -->
+<div class="max-w-6xl mx-auto py-4 md:pt-0 md:pb-8">
+    <div class="text-center mb-12">
+        <div class="inline-flex flex-wrap items-center justify-center gap-2 bg-pink-100 text-pink-700 rounded-full px-3 py-2 md:px-5 md:py-2 font-semibold text-base md:text-2xl shadow mb-6 leading-relaxed">
+            <img src="{% static 'skill.png' %}" alt="Notification" class="w-4 h-4 md:w-8 md:h-8">
+            <span class="text-center">What Makes a Real Analyst</span>
+        </div>
+        <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+            Our case studies are crafted to help you develop practical, real-world analyst skills.
+        </p>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Data Exploration & EDA -->
+        <div class="bg-white border border-black rounded-lg p-6 transition-all duration-200 ease-in-out hover:shadow-[8px_8px_0_0_#000] hover:-translate-y-1 hover:-translate-x-1">
+            <div class="text-3xl mb-4">📊</div>
+            <h3 class="text-xl font-bold mb-3">Data Exploration & EDA</h3>
+            <p class="text-gray-700">Dig deep into datasets to find patterns, outliers, and insights.</p>
+        </div>
+        
+        <!-- Business Thinking -->
+        <div class="bg-white border border-black rounded-lg p-6 transition-all duration-200 ease-in-out hover:shadow-[8px_8px_0_0_#000] hover:-translate-y-1 hover:-translate-x-1">
+            <div class="text-3xl mb-4">🧠</div>
+            <h3 class="text-xl font-bold mb-3">Business Thinking</h3>
+            <p class="text-gray-700">Frame problems in terms of ROI, revenue impact, or user behavior.</p>
+        </div>
+        
+        <!-- SQL for Decision-Making -->
+        <div class="bg-white border border-black rounded-lg p-6 transition-all duration-200 ease-in-out hover:shadow-[8px_8px_0_0_#000] hover:-translate-y-1 hover:-translate-x-1">
+            <div class="text-3xl mb-4">💻</div>
+            <h3 class="text-xl font-bold mb-3">SQL for Decision-Making</h3>
+            <p class="text-gray-700">Query data to answer real business questions with precision.</p>
+        </div>
+        
+        <!-- Communication with Stakeholders -->
+        <div class="bg-white border border-black rounded-lg p-6 transition-all duration-200 ease-in-out hover:shadow-[8px_8px_0_0_#000] hover:-translate-y-1 hover:-translate-x-1">
+            <div class="text-3xl mb-4">💬</div>
+            <h3 class="text-xl font-bold mb-3">Communication with Stakeholders</h3>
+            <p class="text-gray-700">Translate technical findings into decisions that drive business results.</p>
+        </div>
+        
+        <!-- Data Visualization & Storytelling -->
+        <div class="bg-white border border-black rounded-lg p-6 transition-all duration-200 ease-in-out hover:shadow-[8px_8px_0_0_#000] hover:-translate-y-1 hover:-translate-x-1">
+            <div class="text-3xl mb-4">📈</div>
+            <h3 class="text-xl font-bold mb-3">Data Visualization & Storytelling</h3>
+            <p class="text-gray-700">Turn raw insights into clear visuals and narratives using charts, dashboards, or reports.</p>
+        </div>
+        
+        <!-- Automation & Data Workflows -->
+        <div class="bg-white border border-black rounded-lg p-6 transition-all duration-200 ease-in-out hover:shadow-[8px_8px_0_0_#000] hover:-translate-y-1 hover:-translate-x-1">
+            <div class="text-3xl mb-4">⚙️</div>
+            <h3 class="text-xl font-bold mb-3">Automation & Data Workflows</h3>
+            <p class="text-gray-700">If the analysis is valuable and repeatable — automate it. Build dashboards, scheduled queries, and alerting systems.</p>
+        </div>
+    </div>
+</div>
+
 <div class="max-w-6xl mx-auto py-4 md:pt-0 md:pb-8" id="case-studies-section">
     <div class="flex justify-center mb-8">
-        <span class="inline-flex items-center gap-2 bg-pink-100 text-pink-700 rounded-full px-5 py-2 font-semibold text-lg shadow">
-            <img src="{% static 'notification.png' %}" alt="Notification" class="w-5 h-5">
-            Latest Case Studies
-        </span>
+        <div class="inline-flex flex-wrap items-center justify-center gap-2 bg-pink-100 text-pink-700 rounded-full px-3 py-2 md:px-5 md:py-2 font-semibold text-base md:text-2xl shadow">
+            <img src="{% static 'notification.png' %}" alt="Notification" class="w-4 h-4 md:w-8 md:h-8">
+            <span class="text-center">Latest Case Studies</span>
+        </div>
     </div>
 
     <div style="--gap: 24px; --columns: 3;" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
