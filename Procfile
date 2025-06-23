@@ -1,1 +1,1 @@
-web: gunicorn a_core.wsgi
+web: gunicorn casestudy_project.wsgi:application
