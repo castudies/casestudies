@@ -13,6 +13,7 @@ class CaseStudy(models.Model):
 
     title = models.CharField(max_length=200)
     author = models.CharField(max_length=100, blank=True, default='')
+    author_url = models.URLField(max_length=200, blank=True, null=True, help_text="URL for the author's profile or website.")
     thumbnail = models.ImageField(upload_to='thumbnails/', help_text="For best results, use an image that is 1584px wide by 396px tall and content centered.")
     
     difficulty = models.CharField(max_length=20, choices=DIFFICULTY_CHOICES, default='Easy')

@@ -10,7 +10,7 @@ class CaseStudyAdmin(admin.ModelAdmin):
     
     fieldsets = (
         (None, {
-            'fields': ('title', 'author', 'slug', 'thumbnail')
+            'fields': ('title', 'author', 'author_url', 'slug', 'thumbnail')
         }),
         ('Case Details', {
             'fields': ('difficulty', 'domain', 'tags', 'case_background', 'data_summary', 'dataset', 'task')

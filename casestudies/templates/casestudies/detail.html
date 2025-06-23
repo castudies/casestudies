@@ -80,7 +80,15 @@
         <div class="flex items-center text-sm text-gray-500">
             <span>{{ case_study.created_at|date:"F j, Y" }}</span>
             {% if case_study.author %}
-                <span class="ml-4">Author- {{ case_study.author }}</span>
+                <span class="ml-4">Publisher- 
+                    {% if case_study.author_url %}
+                        <a href="{{ case_study.author_url }}" target="_blank" rel="noopener noreferrer" class="font-semibold text-primary hover:underline">
+                            {{ case_study.author }}
+                        </a>
+                    {% else %}
+                        <span class="font-semibold">{{ case_study.author }}</span>
+                    {% endif %}
+                </span>
             {% endif %}
         </div>
     </div>
