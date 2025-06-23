@@ -15,11 +15,15 @@ def all_case_studies(request):
     query = request.GET.get('q')
     difficulty = request.GET.get('difficulty')
     domain = request.GET.get('domain')
+    tags = request.GET.get('tags')
 
     if query:
         studies = studies.filter(
             Q(title__icontains=query) | 
-            Q(case_background__icontains=query)
+            Q(case_background__icontains=query) |
+            Q(tags__icontains=query) |
+            Q(domain__icontains=query) |
+            Q(author__icontains=query)
         )
     
     if difficulty:
@@ -27,12 +31,16 @@ def all_case_studies(request):
         
     if domain:
         studies = studies.filter(domain__iexact=domain)
+        
+    if tags:
+        studies = studies.filter(tags__icontains=tags)
 
     context = {
         'case_studies': studies,
         'query': query,
         'selected_difficulty': difficulty,
         'selected_domain': domain,
+        'selected_tags': tags,
     }
     return render(request, 'casestudies/cases.html', context)
 
@@ -42,6 +50,9 @@ def case_study_detail(request, slug):
 
 def about(request):
     return render(request, 'casestudies/about.html')
+
+def send_case_study(request):
+    return render(request, 'casestudies/send-case-study.html')
 
 def terms_of_service(request):
     return render(request, 'casestudies/terms.html')

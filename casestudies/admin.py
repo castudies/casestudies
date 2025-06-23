@@ -5,7 +5,7 @@ from .models import CaseStudy
 class CaseStudyAdmin(admin.ModelAdmin):
     list_display = ('title', 'author', 'difficulty', 'domain', 'created_at')
     list_filter = ('difficulty', 'domain',)
-    search_fields = ('title', 'author', 'case_background', 'domain')
+    search_fields = ('title', 'author', 'case_background', 'domain', 'tags')
     prepopulated_fields = {'slug': ('title',)}
     
     fieldsets = (
@@ -13,7 +13,7 @@ class CaseStudyAdmin(admin.ModelAdmin):
             'fields': ('title', 'author', 'slug', 'thumbnail')
         }),
         ('Case Details', {
-            'fields': ('difficulty', 'domain', 'case_background', 'data_summary', 'dataset', 'task')
+            'fields': ('difficulty', 'domain', 'tags', 'case_background', 'data_summary', 'dataset', 'task')
         }),
         ('Expert Solution', {
             'classes': ('collapse',),

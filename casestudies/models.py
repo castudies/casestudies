@@ -17,6 +17,7 @@ class CaseStudy(models.Model):
     
     difficulty = models.CharField(max_length=20, choices=DIFFICULTY_CHOICES, default='Easy')
     domain = models.CharField(max_length=100, blank=True)
+    tags = models.CharField(max_length=500, blank=True, help_text="Comma-separated tags (e.g., SQL, Python, EDA, Business)")
     
     case_background = models.TextField(blank=True)
     data_summary = models.TextField(blank=True)
