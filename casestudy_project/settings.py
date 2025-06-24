@@ -13,8 +13,8 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'unsafe-default-key')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DJANGO_DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = ['casestudies-production.up.railway.app']
-CSRF_TRUSTED_ORIGINS = ['https://casestudies-production.up.railway.app']
+ALLOWED_HOSTS = ['casestudies-production.up.railway.app', 'castudies.com']
+CSRF_TRUSTED_ORIGINS = ['https://casestudies-production.up.railway.app', 'https://castudies.com']
 
 # Application definition
 INSTALLED_APPS = [
