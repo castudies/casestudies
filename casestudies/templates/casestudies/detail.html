@@ -151,8 +151,10 @@
             </div>
             {% if case_study.dataset %}
                 {% with case_study.dataset.name|lower as dataset_name %}
+                {% with dataset_name|slice:"-4:" as ext4 %}
+                {% with dataset_name|slice:"-5:" as ext5 %}
                 <div class="mt-4 flex items-center">
-                    {% if dataset_name.endswith ".jpg" or dataset_name.endswith ".jpeg" or dataset_name.endswith ".png" or dataset_name.endswith ".gif" or dataset_name.endswith ".bmp" or dataset_name.endswith ".webp" or dataset_name.endswith ".mp4" or dataset_name.endswith ".webm" or dataset_name.endswith ".mov" or dataset_name.endswith ".avi" or dataset_name.endswith ".mkv" %}
+                    {% if ext4 == ".jpg" or ext4 == ".png" or ext4 == ".gif" or ext4 == ".bmp" or ext4 == ".mp4" or ext4 == ".mov" or ext4 == ".avi" or ext4 == ".mkv" or ext5 == ".jpeg" or ext5 == ".webp" or ext5 == ".webm" %}
                         <a href="{{ case_study.dataset.url }}" target="_blank" rel="noopener noreferrer"
                            class="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium underline hover:no-underline transition-all">
                             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -171,6 +173,8 @@
                     {% endif %}
                     <span class="text-sm text-gray-500 ml-2">({{ case_study.dataset_filename }})</span>
                 </div>
+                {% endwith %}
+                {% endwith %}
                 {% endwith %}
             {% endif %}
         </div>
