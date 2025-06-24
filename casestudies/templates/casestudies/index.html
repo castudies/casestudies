@@ -10,16 +10,16 @@
      x-cloak
      class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75">
 
-  <div class="relative bg-white border-2 border-black-300 shadow-lg rounded-2xl px-6 py-2 md:py-2 w-full max-w-sm text-center flex flex-col items-center pointer-events-auto">
-    <div class="w-14 h-14 mx-auto rounded-lg overflow-hidden bg-gray-50 flex items-center justify-center mb-3">
+  <div class="relative bg-white border-2 border-black-300 shadow-lg rounded-2xl px-6 py-1 md:py-1 w-full max-w-sm text-center flex flex-col items-center pointer-events-auto">
+    <div class="w-14 h-14 mx-auto rounded-lg overflow-hidden bg-gray-50 flex items-center justify-center">
       <video class="w-12 h-12 object-contain" autoplay loop muted playsinline>
         <source src="{% static 'Illustration/notification.mp4' %}" type="video/mp4">
         Your browser does not support the video tag.
       </video>
     </div>
-    <h2 class="text-lg md:text-xl font-bold text-gray-900 mt-2">Join us on the journey!</h2>
-    <p class="text-gray-500 text-sm mt-1 mb-7">Share your case studies to help others learn.</p>
-    <div class="flex flex-col md:flex-row gap-2 w-full mt-2">
+    <h2 class="text-base md:text-lg font-bold text-gray-900">Join us on the journey!</h2>
+    <p class="text-gray-500 text-sm mb-3">Share your case studies to help others learn.</p>
+    <div class="flex flex-col md:flex-row gap-2 w-full mb-4">
       <a href="{% url 'casestudies:send_case_study' %}"
       class="bg-black text-white font-semibold text-sm rounded-md px-4 py-2 w-full md:w-auto shadow-sm transition-all duration-200 ease-in-out hover:bg-gray-800 hover:shadow-[8px_8px_0_0_#000] hover:-translate-y-1 hover:-translate-x-1">Share</a>
       <button @click="show = false"
@@ -33,7 +33,9 @@
     <div class="flex flex-col md:flex-row items-center md:items-stretch justify-between gap-8">
         <!-- Left: Hero Text -->
         <div class="flex-1 flex flex-col justify-center text-left md:pr-8">
-            <h1 class="text-5xl md:text-6xl font-extrabold tracking-tight mb-6 leading-tight">Turn Data Into Better Decisions.</h1>
+            <h1 class="text-5xl md:text-6xl font-extrabold tracking-tight mb-6 leading-tight">
+                Turn Data Into Better <span id="typewriter-word" class="text-primary"></span>
+            </h1>
             <p class="text-xl md:text-2xl text-gray-600 max-w-xl mb-10">
                 Explore real-world, data-driven case studies designed to sharpen your thinking and strengthen your decision-making skills.
             </p>
@@ -52,30 +54,99 @@
         </div>
     </div>
 </div>
+<script>
+// Typewriter effect for hero text
+const words = ["Insights.", "Actions.", "Decisions."];
+const el = document.getElementById("typewriter-word");
+let wordIndex = 0;
+let charIndex = 0;
+let typing = true;
+
+function typeWord() {
+    if (!el) return;
+    if (charIndex < words[wordIndex].length) {
+        el.textContent += words[wordIndex][charIndex];
+        charIndex++;
+        setTimeout(typeWord, 70);
+    } else {
+        typing = false;
+        if (wordIndex < words.length - 1) {
+            setTimeout(eraseWord, 900);
+        }
+    }
+}
+
+function eraseWord() {
+    if (!el) return;
+    if (charIndex > 0) {
+        el.textContent = el.textContent.slice(0, -1);
+        charIndex--;
+        setTimeout(eraseWord, 35);
+    } else {
+        wordIndex++;
+        typing = true;
+        setTimeout(typeWord, 200);
+    }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    el.textContent = "";
+    typeWord();
+});
+</script>
 
 <!-- Built by Analysts Section -->
-<div class="bg-white-50 py-12 md:pt-6 md:pb-16 px-4 rounded-2xl max-w-6xl mx-auto mb-8">
-    <div class="text-center max-w-4xl mx-auto">
-        <div class="inline-flex flex-wrap items-center justify-center gap-2 bg-pink-100 text-pink-700 rounded-full px-3 py-2 md:px-5 md:py-2 font-semibold text-base md:text-2xl shadow">
-            <img src="{% static 'icons/budget-analyst.png' %}" alt="Notification" class="w-4 h-4 md:w-8 md:h-8">
+<div class="max-w-6xl mx-auto mb-12">
+    <div class="text-center mb-6">
+        <div class="inline-flex flex-wrap items-center justify-center gap-2 bg-blue-100 text-primary rounded-full px-3 py-2 md:px-5 md:py-2 font-semibold text-base md:text-2xl shadow">
+            <img src="{% static 'icons/business-analyst.png' %}" alt="Notification" class="w-4 h-4 md:w-8 md:h-8">
             <span class="text-center">Built by Analysts, for Analysts</span>
         </div>
-        <div class="w-16 h-1 bg-white mx-auto mb-8"></div>
-        <p class="text-lg md:text-xl text-gray-700 leading-relaxed">
-            This platform was built by data analysts <span class="bg-red-100 text-red-800 px-1 rounded">frustrated by theory-heavy courses.</span> Our goal? Real-world business problems, with data that's messy, incomplete, and meaningful. Every case study here mimics real situations analysts face in the wild.
-        </p>
+    </div>
+    <div class="bg-white rounded-lg border border-black p-8">
+        <div class="text-center space-y-6">
+            <p class="text-lg md:text-xl text-gray-700 leading-relaxed">
+                This platform was built by data analysts <span class="bg-red-100 text-red-800 px-1 rounded">frustrated by theory-heavy courses.</span> Our goal? Real-world business problems, with data that's messy, incomplete, and meaningful. Every case study here mimics real situations analysts face in the wild.
+            </p>
+            <p class="text-xl font-semibold text-black">Join a growing community of thinkers, doers, and decision-makers.</p>
+            <div class="flex flex-col md:flex-row justify-center gap-6 text-left md:text-center">
+                <div class="flex-1">
+                    <div class="flex items-center gap-2 mb-2 justify-center md:justify-start">
+                        <span class="text-2xl">🤝</span>
+                        <span class="font-semibold">Collaborative Learning</span>
+                    </div>
+                    <p class="text-gray-600">Share insights, discuss solutions, and learn from peers worldwide.</p>
+                </div>
+                <div class="flex-1">
+                    <div class="flex items-center gap-2 mb-2 justify-center md:justify-start">
+                        <span class="text-2xl">🧑‍💻</span>
+                        <span class="font-semibold">Practical Challenges</span>
+                    </div>
+                    <p class="text-gray-600">Tackle real datasets and business scenarios, not just textbook examples.</p>
+                </div>
+                <div class="flex-1">
+                    <div class="flex items-center gap-2 mb-2 justify-center md:justify-start">
+                        <span class="text-2xl">🚀</span>
+                        <span class="font-semibold">Grow Your Skills</span>
+                    </div>
+                    <p class="text-gray-600">Build a portfolio, sharpen your thinking, and stand out as an analyst.</p>
+                </div>
+            </div>
+            <hr class="my-6 border-gray-200">
+            <p class="text-lg text-gray-700">Ready to level up? <span class="font-semibold text-black">Dive into a case study or share your own today.</span></p>
+        </div>
     </div>
 </div>
 
 <!-- Skills Section -->
 <div class="max-w-6xl mx-auto py-4 md:pt-0 md:pb-8">
     <div class="text-center mb-12">
-        <div class="inline-flex flex-wrap items-center justify-center gap-2 bg-pink-100 text-pink-700 rounded-full px-3 py-2 md:px-5 md:py-2 font-semibold text-base md:text-2xl shadow mb-6 leading-relaxed">
-            <img src="{% static 'icons/skill.png' %}" alt="Notification" class="w-4 h-4 md:w-8 md:h-8">
+        <div class="inline-flex flex-wrap items-center justify-center gap-2 bg-blue-100 text-primary rounded-full px-3 py-2 md:px-5 md:py-2 font-semibold text-base md:text-2xl shadow mb-6 leading-relaxed">
+            <img src="{% static 'icons/cognitive.png' %}" alt="Notification" class="w-4 h-4 md:w-8 md:h-8">
             <span class="text-center">What Makes a Real Analyst</span>
         </div>
         <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-            Our case studies are crafted to help you develop practical, real-world analyst skills.
+            Our case studies are crafted to help you develop practical, real-world analytical skills.
         </p>
     </div>
     
@@ -125,9 +196,9 @@
 </div>
 
 <div class="max-w-6xl mx-auto py-4 md:pt-0 md:pb-8" id="case-studies-section">
-    <div class="flex justify-center mb-8">
-        <div class="inline-flex flex-wrap items-center justify-center gap-2 bg-pink-100 text-pink-700 rounded-full px-3 py-2 md:px-5 md:py-2 font-semibold text-base md:text-2xl shadow">
-            <img src="{% static 'icons/notification.png' %}" alt="Notification" class="w-4 h-4 md:w-8 md:h-8">
+    <div class="flex justify-center mt-2 mb-10">
+        <div class="inline-flex flex-wrap items-center justify-center gap-2 bg-blue-100 text-primary rounded-full px-3 py-2 md:px-5 md:py-2 font-semibold text-base md:text-2xl shadow">
+            <img src="{% static 'icons/notification_v2.png' %}" alt="Notification" class="w-4 h-4 md:w-8 md:h-8">
             <span class="text-center">Latest Case Studies</span>
         </div>
     </div>
@@ -166,4 +237,75 @@
         {% endfor %}
     </div>
 </div>
+
+<!-- FAQ Section -->
+<div class="max-w-6xl mx-auto py-8 md:py-12">
+    <div class="flex justify-center mb-8">
+        <div class="inline-flex flex-wrap items-center justify-center gap-2 bg-blue-100 text-primary rounded-full px-3 py-2 md:px-5 md:py-2 font-semibold text-base md:text-2xl shadow">
+            <img src="{% static 'icons/faq.png' %}" alt="FAQ" class="w-4 h-4 md:w-8 md:h-8">
+            <span class="text-center">Frequently Asked Questions</span>
+        </div>
+    </div>
+    <div class="text-center text-gray-600 mb-10 text-lg">Everything you need to know about our case studies platform.</div>
+    <div class="max-w-3xl mx-auto">
+        <div x-data="{ open: 0 }" class="space-y-6">
+            <!-- FAQ 1 -->
+            <div class="border border-gray-300 rounded-lg bg-white px-8 py-6">
+                <button @click="open === 1 ? open = 0 : open = 1" class="w-full flex justify-between items-center text-left font-semibold text-lg focus:outline-none">
+                    <span>Where do you collect the data for case studies?</span>
+                    <span x-show="open !== 1">+</span>
+                    <span x-show="open === 1">-</span>
+                </button>
+                <div x-show="open === 1" class="w-full pb-5 text-gray-700 text-base text-left" x-cloak>
+                    All data used in our case studies is sourced from publicly available, open-source datasets and reputable online repositories. We ensure transparency and provide links to original data sources whenever possible.
+                </div>
+            </div>
+            <!-- FAQ 2 -->
+            <div class="border border-gray-300 rounded-lg bg-white px-8 py-6">
+                <button @click="open === 2 ? open = 0 : open = 2" class="w-full flex justify-between items-center text-left font-semibold text-lg focus:outline-none">
+                    <span>Who creates the case studies?</span>
+                    <span x-show="open !== 2">+</span>
+                    <span x-show="open === 2">-</span>
+                </button>
+                <div x-show="open === 2" class="w-full pb-5 text-gray-700 text-base text-left" x-cloak>
+                    Our case studies are created by a community of data analysts and contributors. Each case study includes author attribution, and many are submitted by users passionate about sharing real-world insights.
+                </div>
+            </div>
+            <!-- FAQ 3 -->
+            <div class="border border-gray-300 rounded-lg bg-white px-8 py-6">
+                <button @click="open === 3 ? open = 0 : open = 3" class="w-full flex justify-between items-center text-left font-semibold text-lg focus:outline-none">
+                    <span>Are all case studies open source?</span>
+                    <span x-show="open !== 3">+</span>
+                    <span x-show="open === 3">-</span>
+                </button>
+                <div x-show="open === 3" class="w-full pb-5 text-gray-700 text-base text-left" x-cloak>
+                    Yes, all case studies and supporting materials are open source. You are free to use, adapt, and share them with proper attribution.
+                </div>
+            </div>
+            <!-- FAQ 4 -->
+            <div class="border border-gray-300 rounded-lg bg-white px-8 py-6">
+                <button @click="open === 4 ? open = 0 : open = 4" class="w-full flex justify-between items-center text-left font-semibold text-lg focus:outline-none">
+                    <span>How can I contribute my own case study?</span>
+                    <span x-show="open !== 4">+</span>
+                    <span x-show="open === 4">-</span>
+                </button>
+                <div x-show="open === 4" class="w-full pb-5 text-gray-700 text-base text-left" x-cloak>
+                    You can submit your case study through our <a href="{% url 'casestudies:send_case_study' %}" class="text-primary underline">submission page</a>. We review all submissions for quality and relevance before publishing.
+                </div>
+            </div>
+            <!-- FAQ 5 -->
+            <div class="border border-gray-300 rounded-lg bg-white px-8 py-6">
+                <button @click="open === 5 ? open = 0 : open = 5" class="w-full flex justify-between items-center text-left font-semibold text-lg focus:outline-none">
+                    <span>Can I use these case studies for teaching or commercial purposes?</span>
+                    <span x-show="open !== 5">+</span>
+                    <span x-show="open === 5">-</span>
+                </button>
+                <div x-show="open === 5" class="w-full pb-5 text-gray-700 text-base text-left" x-cloak>
+                    Absolutely! Our open-source license allows you to use the case studies for educational, research, or commercial projects, as long as you provide proper attribution.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 {% endblock %} 
