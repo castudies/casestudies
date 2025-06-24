@@ -19,4 +19,4 @@ Disallow:
 User-agent: *
 Disallow: /
 
-Sitemap: {{ request.scheme }}://{{ request.get_host }}/sitemap.xml 
+Sitemap: https://castudies.com/sitemap.xml 
