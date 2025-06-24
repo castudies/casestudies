@@ -3,6 +3,7 @@ from typing import TYPE_CHECKING, ClassVar
 from django.utils.text import slugify
 import os
 from datetime import datetime
+from django.urls import reverse
 
 # Create your models here.
 if TYPE_CHECKING:
@@ -50,6 +51,9 @@ class CaseStudy(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse('casestudies:case_study_detail', kwargs={'slug': self.slug})
 
 def upload_with_timestamp(instance, filename):
     base, ext = os.path.splitext(filename)
