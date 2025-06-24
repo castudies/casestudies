@@ -105,7 +105,7 @@ AWS_S3_OBJECT_PARAMETERS = {
     'CacheControl': 'max-age=86400',
 }
 
-AWS_S3_CUSTOM_DOMAIN = 'casestudies-bucket.s3.amazonaws.com'
+AWS_S3_CUSTOM_DOMAIN = 'cdn.castudies.com'
 MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/'
 
 # Default primary key field type
