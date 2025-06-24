@@ -8,7 +8,7 @@ from django.db.models import Q
 
 def home(request):
     latest_cases = CaseStudy.objects.all().order_by('-created_at')[:9]
-    context = {'case_studies': latest_cases}
+    context = {'case_studies': latest_cases, 'query': None}
     return render(request, 'casestudies/index.html', context)
 
 def all_case_studies(request):
