@@ -131,25 +131,32 @@ LOGGING = {
             'class': 'logging.StreamHandler',
             'formatter': 'simple',
         },
+        'custom_admin_email': {
+            'level': 'WARNING',
+            'class': 'casestudies.logging_handlers.CustomAdminEmailHandler',
+        },
     },
     'loggers': {
         'django': {
-            'handlers': ['file', 'console'],
+            'handlers': ['file', 'console', 'custom_admin_email'],
             'level': 'DEBUG' if DEBUG else 'ERROR',
             'propagate': True,
         },
     },
 }
 
-# Email
+# Email Configuration
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = os.environ.get('EMAIL_HOST', 'smtp.gmail.com')
 EMAIL_PORT = int(os.environ.get('EMAIL_PORT', 587))
-EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS', 'True') == 'True'
+EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS', 'True').lower() == 'true'
+EMAIL_USE_SSL = os.environ.get('EMAIL_USE_SSL', 'False').lower() == 'true'
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', '')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', '')
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 SERVER_EMAIL = EMAIL_HOST_USER
 
+# Admin email configuration
 ADMINS = [
     (os.environ.get('ADMIN_NAME', 'Mushfikur Rahman'), os.environ.get('ADMIN_EMAIL', 'mushfikurahmaan@gmail.com'))
 ]

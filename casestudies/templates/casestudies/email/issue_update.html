@@ -1,0 +1,20 @@
+{% extends 'casestudies/email/base_email.html' %}
+
+{% block content %}
+<h2 class="badge badge-blue" style="margin-bottom:16px;">🔔 Issue Update</h2>
+<div class="email-card">
+    <h3 style="color:#b91c1c;font-weight:900;">{{ subject }}</h3>
+    <p>{{ message }}</p>
+    {% if additional_info %}
+    <div class="info-section">
+        <h4>Details:</h4>
+        <p>{{ additional_info|safe }}</p>
+    </div>
+    {% endif %}
+    <div style="margin-top: 10px;">
+        <span class="badge badge-pink">Alert</span>
+        <span class="badge badge-blue">{{ timestamp|date:"M j, Y, h:i A" }}</span>
+    </div>
+</div>
+<p style="color: #666; font-size: 0.98rem; margin-top: 12px;">This is an automated issue update from your Case Studies website.</p>
+{% endblock %} 
