@@ -65,7 +65,7 @@ def case_study_detail(request, slug):
     return render(
         request,
         'casestudies/detail.html',
-        {'case_study': case_study, 'tag_color_pairs': tag_color_pairs}
+        {'case_study': case_study, 'tag_color_pairs': tag_color_pairs, 'query': None}
     )
 
 def about(request):
