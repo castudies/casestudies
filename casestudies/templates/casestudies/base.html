@@ -8,6 +8,8 @@
 
     <!-- Favicon and App Icons -->
     <link rel="icon" type="image/x-icon" href="{% static 'favicon/favicon.ico' %}">
+    <link rel="icon" type="image/svg+xml" href="{% static 'favicon/favicon.svg' %}">
+    <link rel="icon" type="image/png" sizes="96x96" href="{% static 'favicon/favicon-96x96.png' %}">
     
     <!-- Apple Touch Icons -->
     <link rel="apple-touch-icon" href="{% static 'favicon/apple-touch-icon.png' %}">
@@ -16,7 +18,7 @@
     <link rel="manifest" href="{% static 'favicon/site.webmanifest' %}">
     
     <!-- Microsoft Tiles -->
-    <meta name="msapplication-TileImage" content="{% static 'favicon/android-chrome-512x512.png' %}">
+    <meta name="msapplication-TileImage" content="{% static 'favicon/web-app-manifest-512x512.png' %}">
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="theme-color" content="#ffffff">
 
@@ -46,13 +48,13 @@
     {% block social_meta %}
     <meta property="og:title" content="Casestudies - Real-World Data & Analytics Case Studies" />
     <meta property="og:description" content="Discover, share, and learn from real-world case studies in data, analytics, and business. Casestudies is your hub for practical insights and expert solutions." />
-    <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'favicon/android-chrome-512x512.png' %}" />
+    <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'favicon/web-app-manifest-512x512.png' %}" />
     <meta property="og:url" content="{{ request.build_absolute_uri|default:'' }}" />
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Casestudies - Real-World Data & Analytics Case Studies" />
     <meta name="twitter:description" content="Discover, share, and learn from real-world case studies in data, analytics, and business. Casestudies is your hub for practical insights and expert solutions." />
-    <meta name="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'favicon/android-chrome-512x512.png' %}" />
+    <meta name="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'favicon/web-app-manifest-512x512.png' %}" />
     {% endblock %}
 
     {% block robots_meta %}
