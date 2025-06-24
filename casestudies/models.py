@@ -2,6 +2,7 @@ from django.db import models
 from typing import TYPE_CHECKING, ClassVar
 from django.utils.text import slugify
 import os
+from datetime import datetime
 
 # Create your models here.
 if TYPE_CHECKING:
@@ -18,7 +19,7 @@ class CaseStudy(models.Model):
     title = models.CharField(max_length=200)
     author = models.CharField(max_length=100, blank=True, default='')
     author_url = models.URLField(max_length=200, blank=True, null=True, help_text="URL for the author's profile or website.")
-    thumbnail = models.ImageField(upload_to='thumbnails/', help_text="For best results, use an image that is 1584px wide by 396px tall and content centered.")
+    thumbnail = models.ImageField(upload_to=lambda instance, filename: upload_with_timestamp(instance, filename), help_text="For best results, use an image that is 1584px wide by 396px tall and content centered.")
     
     difficulty = models.CharField(max_length=20, choices=DIFFICULTY_CHOICES, default='Easy')
     domain = models.CharField(max_length=100, blank=True)
@@ -26,7 +27,7 @@ class CaseStudy(models.Model):
     
     case_background = models.TextField(blank=True)
     data_summary = models.TextField(blank=True)
-    dataset = models.FileField(upload_to='datasets/', blank=True, null=True, help_text="Upload the dataset file (CSV, Excel, etc.)")
+    dataset = models.FileField(upload_to=lambda instance, filename: upload_with_timestamp(instance, filename), blank=True, null=True, help_text="Upload the dataset file (CSV, Excel, etc.)")
     task = models.TextField(blank=True)
     expert_solution = models.TextField(blank=True)
 
@@ -49,3 +50,13 @@ class CaseStudy(models.Model):
 
     def __str__(self):
         return self.title
+
+def upload_with_timestamp(instance, filename):
+    base, ext = os.path.splitext(filename)
+    now = datetime.now()
+    timestamp = now.strftime('%H%M%d%m%y')
+    new_filename = f"{base}_{timestamp}{ext}"
+    if 'thumbnail' in instance._meta.get_field('thumbnail').attname:
+        return os.path.join('thumbnails', new_filename)
+    else:
+        return os.path.join('datasets', new_filename)

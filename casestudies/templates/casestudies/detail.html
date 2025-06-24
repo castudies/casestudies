@@ -150,17 +150,28 @@
                 {{ case_study.data_summary|linebreaks }}
             </div>
             {% if case_study.dataset %}
+                {% with case_study.dataset.name|lower as dataset_name %}
                 <div class="mt-4 flex items-center">
-                    <a href="{{ case_study.dataset.url }}" 
-                       download
-                       class="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium underline hover:no-underline transition-all">
-                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                        </svg>
-                        Download Dataset
-                    </a>
+                    {% if dataset_name.endswith ".jpg" or dataset_name.endswith ".jpeg" or dataset_name.endswith ".png" or dataset_name.endswith ".gif" or dataset_name.endswith ".bmp" or dataset_name.endswith ".webp" or dataset_name.endswith ".mp4" or dataset_name.endswith ".webm" or dataset_name.endswith ".mov" or dataset_name.endswith ".avi" or dataset_name.endswith ".mkv" %}
+                        <a href="{{ case_study.dataset.url }}" target="_blank" rel="noopener noreferrer"
+                           class="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium underline hover:no-underline transition-all">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553 2.276A2 2 0 0121 14.118V19a2 2 0 01-2 2H5a2 2 0 01-2-2v-4.882a2 2 0 01.447-1.842L8 10m7 0V5a2 2 0 00-2-2H9a2 2 0 00-2 2v5m10 0H6" />
+                            </svg>
+                            View Dataset
+                        </a>
+                    {% else %}
+                        <a href="{{ case_study.dataset.url }}" download
+                           class="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium underline hover:no-underline transition-all">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                            </svg>
+                            Download Dataset
+                        </a>
+                    {% endif %}
                     <span class="text-sm text-gray-500 ml-2">({{ case_study.dataset_filename }})</span>
                 </div>
+                {% endwith %}
             {% endif %}
         </div>
 

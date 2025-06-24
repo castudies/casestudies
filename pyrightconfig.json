@@ -1,4 +1,5 @@
 {
-    "typeCheckingMode": "basic",
-    "reportOperatorIssue": false
-  } 
+  "typeCheckingMode": "basic",
+  "reportOperatorIssue": false,
+  "reportArgumentType": false
+}
