@@ -69,23 +69,23 @@ def case_study_detail(request, slug):
     )
 
 def about(request):
-    return render(request, 'casestudies/about.html')
+    return render(request, 'casestudies/about.html', {'query': None})
 
 def send_case_study(request):
-    return render(request, 'casestudies/send-case-study.html')
+    return render(request, 'casestudies/send-case-study.html', {'query': None})
 
 def terms_of_service(request):
-    return render(request, 'casestudies/terms.html')
+    return render(request, 'casestudies/terms.html', {'query': None})
 
 def privacy_policy(request):
-    return render(request, 'casestudies/privacy.html')
+    return render(request, 'casestudies/privacy.html', {'query': None})
 
 def socials(request):
-    return render(request, 'casestudies/socials.html')
+    return render(request, 'casestudies/socials.html', {'query': None})
 
 def acknowledgements(request):
-    return render(request, 'casestudies/acknowledgements.html')
+    return render(request, 'casestudies/acknowledgements.html', {'query': None})
 
 def custom_404(request, exception=None):
-    return render(request, 'casestudies/404.html', status=404)
+    return render(request, 'casestudies/404.html', {'query': None}, status=404)
 
