@@ -13,5 +13,4 @@ urlpatterns = [
     path('socials/', views.socials, name='socials'),
     path('acknowledgements/', views.acknowledgements, name='acknowledgements'),
     path('<slug:slug>/', views.case_study_detail, name='case_study_detail'),
-
 ] 

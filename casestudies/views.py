@@ -1,4 +1,6 @@
 from django.shortcuts import render, get_object_or_404
+from django.http import Http404
+from django.core.exceptions import ObjectDoesNotExist
 from .models import CaseStudy
 from django.db.models import Q
 
@@ -45,7 +47,11 @@ def all_case_studies(request):
     return render(request, 'casestudies/cases.html', context)
 
 def case_study_detail(request, slug):
-    case_study = get_object_or_404(CaseStudy, slug=slug)
+    try:
+        case_study = CaseStudy.objects.get(slug=slug)
+    except ObjectDoesNotExist:
+        raise Http404("No CaseStudy matches the given query.")
+    
     tags_list = []
     if case_study.tags:
         tags_list = [tag.strip() for tag in case_study.tags.split(',') if tag.strip()]
@@ -80,6 +86,6 @@ def socials(request):
 def acknowledgements(request):
     return render(request, 'casestudies/acknowledgements.html')
 
-def custom_404(request, exception):
+def custom_404(request, exception=None):
     return render(request, 'casestudies/404.html', status=404)
 
