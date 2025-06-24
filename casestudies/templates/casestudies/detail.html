@@ -69,13 +69,13 @@
                 <h3 class="text-base font-semibold text-gray-900 mb-2">Reveal Solution?</h3>
                 <p class="text-sm text-gray-500 mb-4">Are you sure you want to reveal the expert solution?</p>
                 <div class="flex gap-2 justify-center">
-                    <button @click="confirmModal = false" 
+                    <button @click="solutionVisible = true; confirmModal = false"
                             class="px-3 py-2 text-sm font-medium text-gray-700 bg-gray-100 border border-gray-300 rounded-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
-                        Cancel
-                    </button>
-                    <button @click="solutionVisible = true; confirmModal = false" 
-                            class="px-3 py-2 text-sm font-medium text-white bg-black border border-transparent rounded-md hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black">
                         Reveal
+                    </button>
+                    <button @click="confirmModal = false" 
+                            class="px-3 py-2 text-sm font-medium text-white bg-black border border-transparent rounded-md hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black">
+                        Cancel
                     </button>
                 </div>
             </div>
@@ -181,7 +181,7 @@
 
         <div>
             <h2 class="text-2xl font-bold tracking-tight text-gray-800 mb-4">Your Task</h2>
-            <div class="p-8 bg-pink-50 border-2 border-pink-200 rounded-lg">
+            <div class="p-8 border border-black rounded" style="background-color: #4285f233;">
                 <p class="prose max-w-none text-lg text-gray-800">
                     {{ case_study.task|linebreaks }}
                 </p>
@@ -204,7 +204,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14a2 2 0 100-4 2 2 0 000 4z" />
                 </svg>
             </button>
-            <div x-show="solutionVisible" x-cloak x-transition class="mt-6 p-8 border-2 border-black rounded-lg bg-green-50">
+            <div x-show="solutionVisible" x-cloak x-transition class="mt-6 p-8 border border-black rounded-lg bg-green-50">
                 <h2 class="text-3xl font-bold mb-4">Expert Solution</h2>
                 <div class="prose max-w-none text-lg">
                     {{ case_study.expert_solution|linebreaks }}
