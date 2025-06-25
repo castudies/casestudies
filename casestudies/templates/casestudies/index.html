@@ -3,7 +3,9 @@
 {% block title %}Case Studies{% endblock %}
 
 {% block content %}
-<!-- Centered Compact Notification Modal (Border + Stronger Blur + More Gap) -->
+<!-- ===================
+  Centered Notification Modal
+=================== -->
 <div x-data="{ show: false }" 
      x-init="setTimeout(() => show = true, 10000)" 
      x-show="show" 
@@ -28,7 +30,9 @@
   </div>
 </div>
 
-
+<!-- ===================
+  Hero Section
+=================== -->
 <div class="bg-[#ffffff] mt-4 py-6 md:pt-7 md:pb-6 px-4 rounded-2xl max-w-6xl mx-auto mb-4 md:mb-4">
     <div class="flex flex-col md:flex-row items-center md:items-stretch justify-between gap-8">
         <!-- Left: Hero Text -->
@@ -95,50 +99,89 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 
-<!-- Built by Analysts Section -->
-<div class="max-w-6xl mx-auto mb-12">
-    <div class="text-center mb-6">
-        <div class="inline-flex flex-wrap items-center justify-center gap-2 bg-blue-100 text-primary rounded-full px-3 py-2 md:px-5 md:py-2 font-semibold text-base md:text-2xl shadow">
-            <img src="{% static 'icons/business-analyst.png' %}" alt="Notification" class="w-4 h-4 md:w-8 md:h-8">
-            <span class="text-center">Built by Analysts, for Analysts</span>
-        </div>
+<!-- ===================
+  Built by Analysts Section
+=================== -->
+<div class="max-w-6xl mx-auto py-4 md:pt-0 md:pb-8">
+  <div class="custom-mt-80px flex justify-center mt-2 mb-10">
+    <div class="inline-flex flex-wrap items-center justify-center gap-2 bg-blue-100 text-primary rounded-full px-3 py-2 md:px-5 md:py-2 font-semibold text-base md:text-2xl shadow">
+      <img src="{% static 'icons/business-analyst.png' %}" alt="Analyst" class="w-6 h-6 md:w-8 md:h-8">
+      <span class="text-center">Built by Analysts, for Analysts</span>
     </div>
-    <div class="bg-white rounded-lg border border-black p-8">
-        <div class="text-center space-y-6">
-            <p class="text-lg md:text-xl text-gray-700 leading-relaxed">
-                This platform was built by data analysts <span class="bg-red-100 text-red-800 px-1 rounded">frustrated by theory-heavy courses.</span> Our goal? Real-world business problems, with data that's messy, incomplete, and meaningful. Every case study here mimics real situations analysts face in the wild.
-            </p>
-            <p class="text-xl font-semibold text-black">Join a growing community of thinkers, doers, and decision-makers.</p>
-            <div class="flex flex-col md:flex-row justify-center gap-6 text-left md:text-center">
-                <div class="flex-1">
-                    <div class="flex items-center gap-2 mb-2 justify-center md:justify-start">
-                        <span class="text-2xl">🤝</span>
-                        <span class="font-semibold">Collaborative Learning</span>
-                    </div>
-                    <p class="text-gray-600">Share insights, discuss solutions, and learn from peers worldwide.</p>
-                </div>
-                <div class="flex-1">
-                    <div class="flex items-center gap-2 mb-2 justify-center md:justify-start">
-                        <span class="text-2xl">🧑‍💻</span>
-                        <span class="font-semibold">Practical Challenges</span>
-                    </div>
-                    <p class="text-gray-600">Tackle real datasets and business scenarios, not just textbook examples.</p>
-                </div>
-                <div class="flex-1">
-                    <div class="flex items-center gap-2 mb-2 justify-center md:justify-start">
-                        <span class="text-2xl">🚀</span>
-                        <span class="font-semibold">Grow Your Skills</span>
-                    </div>
-                    <p class="text-gray-600">Build a portfolio, sharpen your thinking, and stand out as an analyst.</p>
-                </div>
+  </div>
+  <div class="flex-1 text-center">
+    <p class="text-base md:text-lg text-gray-700 leading-relaxed mb-10">
+      This platform was built by data analysts <span class="bg-red-100 text-red-800 px-1 rounded">frustrated by theory-heavy courses.</span> Our goal? Real-world business problems, with data that's messy, incomplete, and meaningful. Every case study here mimics real situations analysts face in the wild.
+    </p>
+  </div>
+  <div class="bg-gradient-to-br from-blue-50 to-white rounded-2xl shadow-lg p-8 md:p-14 border border-black/10 mb-10">
+    <div class="flex flex-col md:flex-row analyst-flex-row items-stretch gap-10">
+      <!-- Left: Video and Description -->
+      <div class="analyst-left flex flex-col items-center md:items-start">
+        <div class="analyst-video-match w-full flex items-center justify-center mb-4 md:mb-0">
+          <div class="w-full aspect-video rounded-xl overflow-hidden bg-gray-100 flex items-center justify-center">
+            <video class="w-full h-full object-cover" autoplay loop muted playsinline>
+              <source src="{% static 'Illustration/collaboration.mp4' %}" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        </div>
+        <!-- Stack feature cards under video on tablet and smaller screens -->
+        <div class="feature-cards-under-video w-full md:hidden flex flex-col gap-4">
+          <div class="bg-white rounded-2xl border border-gray-200 shadow p-4 flex flex-col items-center gap-2 feature-card-md w-full self-stretch">
+            <div class="flex-shrink-0 text-2xl w-10 h-10 flex items-center justify-center mb-2">🤝</div>
+            <div class="text-center">
+              <div class="font-bold text-base mb-1">Collaborative Learning</div>
+              <div class="text-gray-600 text-sm">Share insights, discuss solutions, and learn from peers worldwide.</div>
             </div>
-            <hr class="my-6 border-gray-200">
-            <p class="text-lg text-gray-700">Ready to level up? <span class="font-semibold text-black">Dive into a case study or share your own today.</span></p>
+          </div>
+          <div class="bg-white rounded-2xl border border-gray-200 shadow p-4 flex flex-col items-center gap-2 feature-card-md w-full self-stretch">
+            <div class="flex-shrink-0 text-2xl w-10 h-10 flex items-center justify-center mb-2">✍</div>
+            <div class="text-center">
+              <div class="font-bold text-base mb-1">Practical Challenges</div>
+              <div class="text-gray-600 text-sm">Tackle real datasets and business scenarios, not just textbook examples.</div>
+            </div>
+          </div>
+          <div class="bg-white rounded-2xl border border-gray-200 shadow p-4 flex flex-col items-center gap-2 feature-card-md w-full self-stretch">
+            <div class="flex-shrink-0 text-2xl w-10 h-10 flex items-center justify-center mb-2">🚀</div>
+            <div class="text-center">
+              <div class="font-bold text-base mb-1">Grow Your Skills</div>
+              <div class="text-gray-600 text-sm">Build a portfolio, sharpen your thinking, and stand out as an analyst.</div>
+            </div>
+          </div>
         </div>
+      </div>
+      <!-- Right: Features as Modern Cards and CTA -->
+      <div class="analyst-right flex flex-col gap-6 hidden md:flex responsive-card-fix">
+        <div class="bg-white rounded-2xl border border-gray-200 shadow p-4 md:p-8 flex flex-col md:flex-row items-center gap-2 md:gap-4 hover:shadow-[8px_8px_0_0_#000] transition-all duration-200 feature-card-md">
+          <div class="flex-shrink-0 text-2xl md:text-3xl w-10 h-10 md:w-14 md:h-14 flex items-center justify-center mb-2 md:mb-0">🤝</div>
+          <div class="text-center md:text-left">
+            <div class="font-bold text-base md:text-lg mb-1">Collaborative Learning</div>
+            <div class="text-gray-600 text-sm md:text-base">Share insights, discuss solutions, and learn from peers worldwide.</div>
+          </div>
+        </div>
+        <div class="bg-white rounded-2xl border border-gray-200 shadow p-4 md:p-8 flex flex-col md:flex-row items-center gap-2 md:gap-4 hover:shadow-[8px_8px_0_0_#000] transition-all duration-200 feature-card-md">
+          <div class="flex-shrink-0 text-2xl md:text-3xl w-10 h-10 md:w-14 md:h-14 flex items-center justify-center mb-2 md:mb-0">✍</div>
+          <div class="text-center md:text-left">
+            <div class="font-bold text-base md:text-lg mb-1">Practical Challenges</div>
+            <div class="text-gray-600 text-sm md:text-base">Tackle real datasets and business scenarios, not just textbook examples.</div>
+          </div>
+        </div>
+        <div class="bg-white rounded-2xl border border-gray-200 shadow p-4 md:p-8 flex flex-col md:flex-row items-center gap-2 md:gap-4 hover:shadow-[8px_8px_0_0_#000] transition-all duration-200 feature-card-md">
+          <div class="flex-shrink-0 text-2xl md:text-3xl w-10 h-10 md:w-14 md:h-14 flex items-center justify-center mb-2 md:mb-0">🚀</div>
+          <div class="text-center md:text-left">
+            <div class="font-bold text-base md:text-lg mb-1">Grow Your Skills</div>
+            <div class="text-gray-600 text-sm md:text-base">Build a portfolio, sharpen your thinking, and stand out as an analyst.</div>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </div>
 
-<!-- Skills Section -->
+<!-- ===================
+  Skills Section
+=================== -->
 <div class="max-w-6xl mx-auto py-4 md:pt-0 md:pb-8">
     <div class="text-center mb-12">
         <div class="inline-flex flex-wrap items-center justify-center gap-2 bg-blue-100 text-primary rounded-full px-3 py-2 md:px-5 md:py-2 font-semibold text-base md:text-2xl shadow mb-6 leading-relaxed">
@@ -195,6 +238,9 @@ document.addEventListener("DOMContentLoaded", () => {
     </div>
 </div>
 
+<!-- ===================
+  Latest Case Studies Section
+=================== -->
 <div class="max-w-6xl mx-auto py-4 md:pt-0 md:pb-8" id="case-studies-section">
     <div class="flex justify-center mt-2 mb-10">
         <div class="inline-flex flex-wrap items-center justify-center gap-2 bg-blue-100 text-primary rounded-full px-3 py-2 md:px-5 md:py-2 font-semibold text-base md:text-2xl shadow">
@@ -244,7 +290,9 @@ document.addEventListener("DOMContentLoaded", () => {
     </div>
 </div>
 
-<!-- FAQ Section -->
+<!-- ===================
+  FAQ Section
+=================== -->
 <div class="max-w-6xl mx-auto py-8 md:py-12">
     <div class="flex justify-center mb-8">
         <div class="inline-flex flex-wrap items-center justify-center gap-2 bg-blue-100 text-primary rounded-full px-3 py-2 md:px-5 md:py-2 font-semibold text-base md:text-2xl shadow">
