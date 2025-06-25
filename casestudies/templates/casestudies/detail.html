@@ -144,16 +144,16 @@
     
     <!-- Case Study Body -->
     <div class="space-y-16">
-        <div class="ibm-plex-section">
+        <div>
             <h2 class="text-2xl font-bold tracking-tight text-gray-800 mb-4">Case Background</h2>
-            <div class="prose max-w-none text-gray-700">
+            <div class="ibm-plex-section prose max-w-none text-gray-700">
                 {{ case_study.case_background|linebreaks }}
             </div>
         </div>
         
-        <div class="ibm-plex-section">
+        <div>
             <h2 class="text-2xl font-bold tracking-tight text-gray-800 mb-4">Data Summary</h2>
-            <div class="prose max-w-none text-gray-700 mb-4">
+            <div class="ibm-plex-section prose max-w-none text-gray-700 mb-4">
                 {{ case_study.data_summary|linebreaks }}
             </div>
             {% if case_study.dataset %}
@@ -186,9 +186,9 @@
             {% endif %}
         </div>
 
-        <div class="ibm-plex-section">
+        <div>
             <h2 class="text-2xl font-bold tracking-tight text-gray-800 mb-4">Your Task</h2>
-            <div class="p-8 border border-black rounded" style="background-color: #4285f233;">
+            <div class="ibm-plex-section text-base p-8 border border-black rounded" style="background-color: #4285f233;">
                 <p class="prose max-w-none text-base text-gray-800">
                     {{ case_study.task|linebreaks }}
                 </p>
@@ -211,9 +211,9 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14a2 2 0 100-4 2 2 0 000 4z" />
                 </svg>
             </button>
-            <div x-show="solutionVisible" x-cloak x-transition class="mt-6 p-8 border border-black rounded-lg bg-green-50 ibm-plex-section">
+            <div x-show="solutionVisible" x-cloak x-transition class="mt-6 p-8 border border-black rounded-lg bg-green-50">
                 <h2 class="text-3xl font-bold mb-4">Expert Solution</h2>
-                <div class="prose max-w-none text-base">
+                <div class="ibm-plex-section prose max-w-none text-base">
                     {{ case_study.expert_solution|linebreaks }}
                 </div>
             </div>

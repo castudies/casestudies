@@ -17,3 +17,13 @@
     background-color: #fecaca;
     color: #991b1b;
 } 
+
+/* styles.css or inside a <style> tag */
+@media (width: 768px) and (height: 1024px), /* iPad Mini */
+       (width: 820px) and (height: 1180px), /* iPad Air */
+       (width: 912px) and (height: 1368px), /* Surface Pro 7 */
+       (width: 853px) and (height: 1280px)  /* Asus Zenbook Fold */ {
+    .custom-xs-text {
+        font-size: 0.75rem; /* Tailwind's text-xs */
+    }
+}
