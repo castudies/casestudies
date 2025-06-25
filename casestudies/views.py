@@ -12,13 +12,15 @@ def home(request):
     return render(request, 'casestudies/index.html', context)
 
 def all_case_studies(request):
-    studies = CaseStudy.objects.all().order_by('-created_at')
+    studies = CaseStudy.objects.all()
     
     query = request.GET.get('q')
     difficulty = request.GET.get('difficulty')
     domain = request.GET.get('domain')
     tags = request.GET.get('tags')
-# Pyright: this is a valid Django Q expression, safe to ignore the warning
+    sort_by = request.GET.get('sort', '-created_at')  # Default to latest first
+    
+    # Apply search filter
     if query:
         studies = studies.filter(   
             Q(title__icontains=query) | 
@@ -28,6 +30,7 @@ def all_case_studies(request):
             Q(author__icontains=query)
         )
     
+    # Apply filters
     if difficulty:
         studies = studies.filter(difficulty=difficulty)
         
@@ -37,12 +40,31 @@ def all_case_studies(request):
     if tags:
         studies = studies.filter(tags__icontains=tags)
 
+    # Apply sorting
+    if sort_by == 'created_at':
+        studies = studies.order_by('created_at')  # Oldest first
+    elif sort_by == '-created_at':
+        studies = studies.order_by('-created_at')  # Latest first
+    elif sort_by == 'title':
+        studies = studies.order_by('title')  # A-Z
+    elif sort_by == '-title':
+        studies = studies.order_by('-title')  # Z-A
+    else:
+        studies = studies.order_by('-created_at')  # Default to latest first
+
+    # Get available filter options
+    available_domains = CaseStudy.objects.values_list('domain', flat=True).distinct().exclude(domain='').order_by('domain')
+    available_difficulties = CaseStudy.DIFFICULTY_CHOICES
+
     context = {
         'case_studies': studies,
         'query': query,
         'selected_difficulty': difficulty,
         'selected_domain': domain,
         'selected_tags': tags,
+        'selected_sort': sort_by,
+        'available_domains': available_domains,
+        'available_difficulties': available_difficulties,
     }
     return render(request, 'casestudies/cases.html', context)
 

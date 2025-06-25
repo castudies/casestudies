@@ -10,9 +10,94 @@
             <span class="text-center">All Case Studies</span>
         </div>
     </div>
+
+    <!-- Search Results Header -->
     {% if query %}
         <h1 class="text-3xl font-bold mb-8">Search results for: <span class="text-pink-500">"{{ query|default:'' }}"</span></h1>
     {% endif %}
+
+    <!-- Filters and Sort Section -->
+    <div class="bg-white rounded-lg border border-black p-6 mb-8 transition-all duration-200 ease-in-out hover:shadow-[4px_4px_0_0_#000]">
+        <form method="GET" class="space-y-6">
+            <!-- Preserve search query if exists -->
+            {% if query %}
+                <input type="hidden" name="q" value="{{ query }}">
+            {% endif %}
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Domain Filter -->
+                <div>
+                    <label for="domain" class="block text-sm font-bold text-gray-800 mb-3">Filter by Domain</label>
+                    <div class="relative">
+                        <select name="domain" id="domain" class="appearance-none w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-colors bg-white text-base font-semibold pr-10 hover:border-black">
+                            <option value="">All Domains</option>
+                            {% for domain in available_domains %}
+                                <option value="{{ domain }}" {% if selected_domain == domain %}selected{% endif %}>{{ domain }}</option>
+                            {% endfor %}
+                        </select>
+                        <span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Difficulty Filter -->
+                <div>
+                    <label for="difficulty" class="block text-sm font-bold text-gray-800 mb-3">Filter by Level</label>
+                    <div class="relative">
+                        <select name="difficulty" id="difficulty" class="appearance-none w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-colors bg-white text-base font-semibold pr-10 hover:border-black">
+                            <option value="">All Levels</option>
+                            {% for difficulty_code, difficulty_name in available_difficulties %}
+                                <option value="{{ difficulty_code }}" {% if selected_difficulty == difficulty_code %}selected{% endif %}>{{ difficulty_name }}</option>
+                            {% endfor %}
+                        </select>
+                        <span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Sort Options -->
+                <div>
+                    <label for="sort" class="block text-sm font-bold text-gray-800 mb-3">Sort by</label>
+                    <div class="relative">
+                        <select name="sort" id="sort" class="appearance-none w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-colors bg-white text-base font-semibold pr-10 hover:border-black">
+                            <option value="-created_at" {% if selected_sort == '-created_at' %}selected{% endif %}>Latest First</option>
+                            <option value="created_at" {% if selected_sort == 'created_at' %}selected{% endif %}>Oldest First</option>
+                            <option value="title" {% if selected_sort == 'title' %}selected{% endif %}>Title A-Z</option>
+                            <option value="-title" {% if selected_sort == '-title' %}selected{% endif %}>Title Z-A</option>
+                        </select>
+                        <span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Filter Actions -->
+            <div class="flex flex-col sm:flex-row gap-4 pt-2">
+                <button type="submit" class="bg-black text-white px-8 py-3 rounded-lg font-semibold hover:bg-gray-800 transition-all duration-200 ease-in-out hover:shadow-[4px_4px_0_0_#000] hover:-translate-y-1 hover:-translate-x-1">
+                    Apply Filters
+                </button>
+                <a href="{% url 'casestudies:case_study_list' %}" class="bg-white border-2 border-gray-300 text-gray-700 px-8 py-3 rounded-lg font-semibold hover:bg-gray-50 transition-all duration-200 ease-in-out hover:shadow-[4px_4px_0_0_#000] hover:-translate-y-1 hover:-translate-x-1 text-center">
+                    Clear All
+                </a>
+            </div>
+        </form>
+    </div>
+
+    <!-- Results Count -->
+    <div class="mb-6">
+        <p class="text-gray-600 font-medium">
+            {% if case_studies %}
+                Showing {{ case_studies|length }} case study{{ case_studies|length|pluralize }}
+                {% if selected_domain or selected_difficulty %}
+                    with applied filters
+                {% endif %}
+            {% else %}
+                No case studies found
+            {% endif %}
+        </p>
+    </div>
+
+    <!-- Case Studies Grid -->
     <div style="--gap: 24px; --columns: 3;" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {% for case_study in case_studies %}
         <a href="{% url 'casestudies:case_study_detail' case_study.slug %}"
@@ -47,8 +132,12 @@
         </a>
         {% empty %}
         <div class="col-span-full text-center py-12">
-            <p class="text-gray-500 text-lg">No case studies available yet.</p>
-            <p class="text-gray-400 mt-2">Add your first one in the admin panel!</p>
+            <p class="text-gray-500 text-lg">No case studies found.</p>
+            {% if selected_domain or selected_difficulty %}
+                <p class="text-gray-400 mt-2">Try adjusting your filters.</p>
+            {% else %}
+                <p class="text-gray-400 mt-2">Add your first one in the admin panel!</p>
+            {% endif %}
         </div>
         {% endfor %}
     </div>
