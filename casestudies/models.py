@@ -17,13 +17,30 @@ class CaseStudy(models.Model):
         ('Advanced', 'Advanced'),
     ]
 
+    DOMAIN_CHOICES = [
+        ("Business & Marketing", "Business & Marketing"),
+        ("Sales & Revenue", "Sales & Revenue"),
+        ("Finance", "Finance"),
+        ("Healthcare & Medical", "Healthcare & Medical"),
+        ("Retail & E-commerce", "Retail & E-commerce"),
+        ("Web & App", "Web & App"),
+        ("Social Media & Influencer", "Social Media & Influencer"),
+        ("Supply Chain & Logistics", "Supply Chain & Logistics"),
+        ("Education", "Education"),
+        ("Government & Public Sector", "Government & Public Sector"),
+        ("Manufacturing & Operations", "Manufacturing & Operations"),
+        ("Energy & Environment", "Energy & Environment"),
+        ("Real Estate & Property", "Real Estate & Property"),
+        ("Sports & Fitness", "Sports & Fitness"),
+    ]
+
     title = models.CharField(max_length=200)
     author = models.CharField(max_length=100, blank=True, default='')
     author_url = models.URLField(max_length=200, blank=True, null=True, help_text="URL for the author's profile or website.")
     thumbnail = models.ImageField(upload_to=lambda instance, filename: upload_with_timestamp(instance, filename), help_text="For best results, use an image that is 1584px wide by 396px tall and content centered.")
     
     difficulty = models.CharField(max_length=20, choices=DIFFICULTY_CHOICES, default='Easy')
-    domain = models.CharField(max_length=100, blank=True)
+    domain = models.CharField(max_length=100, blank=True, choices=DOMAIN_CHOICES)
     tags = models.CharField(max_length=500, blank=True, help_text="Comma-separated tags (e.g., SQL, Python, EDA, Business)")
     
     case_background = models.TextField(blank=True)
