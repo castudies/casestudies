@@ -17,72 +17,51 @@
     {% endif %}
 
     <!-- Filters and Sort Section -->
-    <div class="bg-white rounded-lg border border-black p-6 mb-8 transition-all duration-200 ease-in-out hover:shadow-[4px_4px_0_0_#000]">
-        <form method="GET" class="space-y-6">
-            <!-- Preserve search query if exists -->
-            {% if query %}
-                <input type="hidden" name="q" value="{{ query }}">
-            {% endif %}
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- Domain Filter -->
-                <div>
-                    <label for="domain" class="block text-sm font-bold text-gray-800 mb-3">Filter by Domain</label>
-                    <div class="relative">
-                        <select name="domain" id="domain" class="appearance-none w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-colors bg-white text-base font-semibold pr-10 hover:border-black">
-                            <option value="">All Domains</option>
-                            {% for domain in available_domains %}
-                                <option value="{{ domain }}" {% if selected_domain == domain %}selected{% endif %}>{{ domain }}</option>
-                            {% endfor %}
-                        </select>
-                        <span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
-                        </span>
-                    </div>
-                </div>
-
-                <!-- Difficulty Filter -->
-                <div>
-                    <label for="difficulty" class="block text-sm font-bold text-gray-800 mb-3">Filter by Level</label>
-                    <div class="relative">
-                        <select name="difficulty" id="difficulty" class="appearance-none w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-colors bg-white text-base font-semibold pr-10 hover:border-black">
-                            <option value="">All Levels</option>
-                            {% for difficulty_code, difficulty_name in available_difficulties %}
-                                <option value="{{ difficulty_code }}" {% if selected_difficulty == difficulty_code %}selected{% endif %}>{{ difficulty_name }}</option>
-                            {% endfor %}
-                        </select>
-                        <span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
-                        </span>
-                    </div>
-                </div>
-
-                <!-- Sort Options -->
-                <div>
-                    <label for="sort" class="block text-sm font-bold text-gray-800 mb-3">Sort by</label>
-                    <div class="relative">
-                        <select name="sort" id="sort" class="appearance-none w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-colors bg-white text-base font-semibold pr-10 hover:border-black">
-                            <option value="-created_at" {% if selected_sort == '-created_at' %}selected{% endif %}>Latest First</option>
-                            <option value="created_at" {% if selected_sort == 'created_at' %}selected{% endif %}>Oldest First</option>
-                            <option value="title" {% if selected_sort == 'title' %}selected{% endif %}>Title A-Z</option>
-                            <option value="-title" {% if selected_sort == '-title' %}selected{% endif %}>Title Z-A</option>
-                        </select>
-                        <span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
-                        </span>
-                    </div>
-                </div>
+    <div class="filter-container">
+        <form method="GET">
+          <div class="filter-row">
+      
+            <div class="filter-item">
+              <label for="domain">Domain</label>
+              <select name="domain" id="domain">
+                <option value="">All</option>
+                <option value="Fintech">Fintech</option>
+                <option value="Tech">Tech</option>
+              </select>
             </div>
-
-            <!-- Filter Actions -->
-            <div class="flex flex-col sm:flex-row gap-4 pt-2">
-                <button type="submit" class="bg-black text-white px-8 py-3 rounded-lg font-semibold hover:bg-gray-800 transition-all duration-200 ease-in-out hover:shadow-[4px_4px_0_0_#000] hover:-translate-y-1 hover:-translate-x-1">
-                    Apply Filters
-                </button>
-                <a href="{% url 'casestudies:case_study_list' %}" class="bg-white border-2 border-gray-300 text-gray-700 px-8 py-3 rounded-lg font-semibold hover:bg-gray-50 transition-all duration-200 ease-in-out hover:shadow-[4px_4px_0_0_#000] hover:-translate-y-1 hover:-translate-x-1 text-center">
-                    Clear All
-                </a>
+      
+            <div class="filter-item">
+              <label for="difficulty">Level</label>
+              <select name="difficulty" id="difficulty">
+                <option value="">All</option>
+                <option value="Easy">Easy</option>
+                <option value="Intermediate">Intermediate</option>
+                <option value="Advanced">Advanced</option>
+              </select>
             </div>
+      
+            <div class="filter-item">
+              <label for="sort">Sort</label>
+              <select name="sort" id="sort">
+                <option value="-created_at">Latest</option>
+                <option value="created_at">Oldest</option>
+                <option value="title">A-Z</option>
+                <option value="-title">Z-A</option>
+              </select>
+            </div>
+      
+            <div class="filter-item button-item">
+              <button type="submit">Apply</button>
+            </div>
+      
+            <div class="filter-item button-item">
+              <a href="/cases/">Clear</a>
+            </div>
+      
+          </div>
         </form>
-    </div>
-
+      </div>
+             
     <!-- Results Count -->
     <div class="mb-6">
         <p class="text-gray-600 font-medium">
