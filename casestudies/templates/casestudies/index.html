@@ -219,7 +219,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
             <div class="p-5">
                 <div class="flex items-center gap-2 mb-3">
-                    <span class="inline-block bg-pink-100 text-pink-700 text-xs font-semibold px-2.5 py-1 rounded-full">{{ case_study.difficulty }}</span>
+                    <span class="inline-block text-xs font-semibold px-2.5 py-1 rounded-full
+                               {% if case_study.difficulty == 'Easy' %}easy-green
+                               {% elif case_study.difficulty == 'Intermediate' %}intermediate-orange
+                               {% elif case_study.difficulty == 'Advanced' %}advanced-red
+                               {% else %}bg-pink-100 text-pink-700{% endif %}">
+                        {{ case_study.difficulty }}
+                    </span>
                     <span class="inline-block bg-blue-100 text-primary text-xs font-semibold px-2.5 py-1 rounded-full">{{ case_study.domain }}</span>
                 </div>
                 <h2 class="text-xl font-bold mb-3">{{ case_study.title }}</h2>

@@ -52,6 +52,13 @@ def case_study_detail(request, slug):
     except ObjectDoesNotExist:
         raise Http404("No CaseStudy matches the given query.")
     
+    # Get similar case studies based on domain (excluding current case study)
+    similar_case_studies = CaseStudy.objects.filter(
+        domain=case_study.domain
+    ).exclude(
+        id=case_study.id
+    ).order_by('-created_at')[:3]  # Limit to 3 similar case studies
+    
     tags_list = []
     if case_study.tags:
         tags_list = [tag.strip() for tag in case_study.tags.split(',') if tag.strip()]
@@ -65,7 +72,12 @@ def case_study_detail(request, slug):
     return render(
         request,
         'casestudies/detail.html',
-        {'case_study': case_study, 'tag_color_pairs': tag_color_pairs, 'query': None}
+        {
+            'case_study': case_study, 
+            'tag_color_pairs': tag_color_pairs, 
+            'similar_case_studies': similar_case_studies,
+            'query': None
+        }
     )
 
 def about(request):
