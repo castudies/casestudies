@@ -24,10 +24,11 @@ from django.contrib.sitemaps.views import sitemap
 from django.contrib.sitemaps import GenericSitemap
 from django.views.static import serve
 from casestudies.models import CaseStudy
+from casestudies.views import custom_404
 
 urlpatterns = [
     path("63f4ul7/", admin.site.urls),
-    path('admin/', lambda request: HttpResponseNotFound()),
+    path('admin/', custom_404, name='admin_404'),
     path('', include('casestudies.urls')),
 ]
 
