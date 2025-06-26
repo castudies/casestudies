@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import CaseStudy
+from .models import CaseStudy, Notification
 
 @admin.register(CaseStudy)
 class CaseStudyAdmin(admin.ModelAdmin):
@@ -18,5 +18,19 @@ class CaseStudyAdmin(admin.ModelAdmin):
         ('Expert Solution', {
             'classes': ('collapse',),
             'fields': ('expert_solution',),
+        }),
+    )
+
+@admin.register(Notification)
+class NotificationAdmin(admin.ModelAdmin):
+    list_display = ("title", "is_active", "updated_at")
+    list_filter = ("is_active",)
+    search_fields = ("title", "body", "button_text")
+    fieldsets = (
+        (None, {
+            'fields': ("title", "body", "video", "is_active", "delay_seconds")
+        }),
+        ("Button", {
+            'fields': ("button_text", "button_link")
         }),
     )

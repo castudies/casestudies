@@ -3,12 +3,14 @@ from django.http import Http404
 from django.core.exceptions import ObjectDoesNotExist
 from .models import CaseStudy
 from django.db.models import Q
+from .models import Notification
 
 # Create your views here.
 
 def home(request):
     latest_cases = CaseStudy.objects.all().order_by('-created_at')[:9]
-    context = {'case_studies': latest_cases, 'query': None}
+    notification = Notification.objects.filter(is_active=True).first()  # type: ignore
+    context = {'case_studies': latest_cases, 'query': None, 'notification': notification}
     return render(request, 'casestudies/index.html', context)
 
 def all_case_studies(request):
@@ -122,4 +124,3 @@ def acknowledgements(request):
 
 def custom_404(request, exception=None):
     return render(request, 'casestudies/404.html', {'query': None}, status=404)
-

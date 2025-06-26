@@ -6,29 +6,35 @@
 <!-- ===================
   Centered Notification Modal
 =================== -->
-<div x-data="{ show: false }" 
-     x-init="setTimeout(() => show = true, 10000)" 
-     x-show="show" 
+{% if notification %}
+<div x-data="{ show: false }"
+     x-init="setTimeout(() => show = true, {{ notification.delay_seconds|default:10 }} * 1000)"
+     x-show="show"
      x-cloak
      class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75">
 
   <div class="relative bg-white border-2 border-black-300 shadow-lg rounded-2xl px-6 py-1 md:py-1 w-full max-w-sm text-center flex flex-col items-center pointer-events-auto">
     <div class="w-14 h-14 mx-auto rounded-lg overflow-hidden bg-gray-50 flex items-center justify-center">
+      {% if notification.video %}
       <video class="w-12 h-12 object-contain" autoplay loop muted playsinline>
-        <source src="{% static 'Illustration/notification.mp4' %}" type="video/mp4">
+        <source src="{{ notification.video.url }}" type="video/mp4">
         Your browser does not support the video tag.
       </video>
+      {% endif %}
     </div>
-    <h2 class="text-base md:text-lg font-bold text-gray-900">Join us on the journey!</h2>
-    <p class="text-gray-500 text-sm mb-3">Share your case studies to help others learn.</p>
+    <h2 class="text-base md:text-lg font-bold text-gray-900">{{ notification.title }}</h2>
+    <p class="text-gray-500 text-sm mb-3">{{ notification.body }}</p>
     <div class="flex flex-col md:flex-row gap-2 w-full mb-4">
-      <a href="{% url 'casestudies:send_case_study' %}"
-      class="bg-black text-white font-semibold text-sm rounded-md px-4 py-2 w-full md:w-auto shadow-sm transition-all duration-200 ease-in-out hover:bg-gray-800 hover:shadow-[8px_8px_0_0_#000] hover:-translate-y-1 hover:-translate-x-1">Share</a>
+      {% if notification.button_link %}
+      <a href="{{ notification.button_link }}"
+      class="bg-black text-white font-semibold text-sm rounded-md px-4 py-2 w-full md:w-auto shadow-sm transition-all duration-200 ease-in-out hover:bg-gray-800 hover:shadow-[8px_8px_0_0_#000] hover:-translate-y-1 hover:-translate-x-1">{{ notification.button_text }}</a>
+      {% endif %}
       <button @click="show = false"
               class="bg-white border border-gray-300 text-gray-700 font-semibold text-sm rounded-md px-4 py-2 w-full md:w-auto hover:bg-gray-100 transition">Maybe Later</button>
     </div>
   </div>
 </div>
+{% endif %}
 
 <!-- ===================
   Hero Section
@@ -104,7 +110,7 @@ document.addEventListener("DOMContentLoaded", () => {
 =================== -->
 <div class="max-w-6xl mx-auto py-4 md:pt-0 md:pb-8">
   <div class="custom-mt-80px flex justify-center mt-2 mb-10">
-    <div class="inline-flex flex-wrap items-center justify-center gap-2 bg-blue-100 text-primary rounded-full px-3 py-2 md:px-5 md:py-2 font-semibold text-base md:text-2xl shadow">
+    <div class="inline-flex flex-wrap items-center justify-center gap-2 bg-blue-100 text-primary rounded-full px-3 py-2 md:px-5 md:py-2 font-semibold text-base md:text-2xl shadow border border-black ">
       <img src="{% static 'icons/business-analyst.png' %}" alt="Analyst" class="w-6 h-6 md:w-8 md:h-8">
       <span class="text-center">Built by Analysts, for Analysts</span>
     </div>
@@ -184,7 +190,7 @@ document.addEventListener("DOMContentLoaded", () => {
 =================== -->
 <div class="max-w-6xl mx-auto py-4 md:pt-0 md:pb-8">
     <div class="text-center mb-12">
-        <div class="inline-flex flex-wrap items-center justify-center gap-2 bg-blue-100 text-primary rounded-full px-3 py-2 md:px-5 md:py-2 font-semibold text-base md:text-2xl shadow mb-6 leading-relaxed">
+        <div class="inline-flex flex-wrap items-center justify-center gap-2 bg-blue-100 text-primary rounded-full px-3 py-2 md:px-5 md:py-2 font-semibold text-base md:text-2xl shadow mb-6 leading-relaxed border border-black">
             <img src="{% static 'icons/cognitive.png' %}" alt="Notification" class="w-4 h-4 md:w-8 md:h-8">
             <span class="text-center">What Makes a Real Analyst</span>
         </div>
@@ -243,7 +249,7 @@ document.addEventListener("DOMContentLoaded", () => {
 =================== -->
 <div class="max-w-6xl mx-auto py-4 md:pt-0 md:pb-8" id="case-studies-section">
     <div class="flex justify-center mt-2 mb-10">
-        <div class="inline-flex flex-wrap items-center justify-center gap-2 bg-blue-100 text-primary rounded-full px-3 py-2 md:px-5 md:py-2 font-semibold text-base md:text-2xl shadow">
+        <div class="inline-flex flex-wrap items-center justify-center gap-2 bg-blue-100 text-primary rounded-full px-3 py-2 md:px-5 md:py-2 font-semibold text-base md:text-2xl shadow border border-black">
             <img src="{% static 'icons/notification_v2.png' %}" alt="Notification" class="w-4 h-4 md:w-8 md:h-8">
             <span class="text-center">Latest Case Studies</span>
         </div>
@@ -295,7 +301,7 @@ document.addEventListener("DOMContentLoaded", () => {
 =================== -->
 <div class="max-w-6xl mx-auto py-8 md:py-12">
     <div class="flex justify-center mb-8">
-        <div class="inline-flex flex-wrap items-center justify-center gap-2 bg-blue-100 text-primary rounded-full px-3 py-2 md:px-5 md:py-2 font-semibold text-base md:text-2xl shadow">
+        <div class="inline-flex flex-wrap items-center justify-center gap-2 bg-blue-100 text-primary rounded-full px-3 py-2 md:px-5 md:py-2 font-semibold text-base md:text-2xl shadow border border-black">
             <img src="{% static 'icons/faq.png' %}" alt="FAQ" class="w-4 h-4 md:w-8 md:h-8">
             <span class="text-center">Frequently Asked Questions</span>
         </div>
