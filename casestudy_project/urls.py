@@ -30,6 +30,7 @@ urlpatterns = [
     path("63f4ul7/", admin.site.urls),
     path('admin/', custom_404, name='admin_404'),
     path('', include('casestudies.urls')),
+    path("ckeditor5/", include('django_ckeditor_5.urls')),
 ]
 
 if settings.DEBUG:

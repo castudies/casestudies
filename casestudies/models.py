@@ -4,6 +4,7 @@ from django.utils.text import slugify
 import os
 from datetime import datetime
 from django.urls import reverse
+from django_ckeditor_5.fields import CKEditor5Field
 
 if TYPE_CHECKING:
     from django.db.models.manager import Manager
@@ -57,7 +58,7 @@ class CaseStudy(models.Model):
     data_summary = models.TextField(blank=True)
     dataset = models.FileField(upload_to=upload_with_timestamp, blank=True, null=True, help_text="Upload the dataset file (CSV, Excel, etc.)")
     task = models.TextField(blank=True)
-    expert_solution = models.TextField(blank=True)
+    expert_solution = CKEditor5Field(blank=True, config_name='extends')
 
     created_at = models.DateTimeField(auto_now_add=True)
     slug = models.SlugField(unique=True, blank=True)

@@ -399,3 +399,214 @@ body {
     flex-grow: 0;
   }
 }
+
+/* ========== CKEditor Content Styles ========== */
+/* Expert Solution Content Overflow Handling */
+.expert-solution-content {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
+}
+
+/* CKEditor Font Size Classes */
+.expert-solution-content .text-tiny {
+    font-size: 0.7em !important;
+}
+
+.expert-solution-content .text-small {
+    font-size: 0.85em !important;
+}
+
+.expert-solution-content .text-big {
+    font-size: 1.4em !important;
+}
+
+.expert-solution-content .text-huge {
+    font-size: 1.8em !important;
+}
+
+/* CKEditor Font Family Classes */
+.expert-solution-content .font-arial {
+    font-family: Arial, sans-serif !important;
+}
+
+.expert-solution-content .font-comic-sans {
+    font-family: "Comic Sans MS", cursive, sans-serif !important;
+}
+
+.expert-solution-content .font-courier-new {
+    font-family: "Courier New", Courier, monospace !important;
+}
+
+.expert-solution-content .font-georgia {
+    font-family: Georgia, serif !important;
+}
+
+.expert-solution-content .font-lucida-sans {
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif !important;
+}
+
+.expert-solution-content .font-tahoma {
+    font-family: Tahoma, Geneva, sans-serif !important;
+}
+
+.expert-solution-content .font-times-new-roman {
+    font-family: "Times New Roman", Times, serif !important;
+}
+
+.expert-solution-content .font-trebuchet {
+    font-family: "Trebuchet MS", Helvetica, sans-serif !important;
+}
+
+.expert-solution-content .font-verdana {
+    font-family: Verdana, Geneva, sans-serif !important;
+}
+
+/* Table overflow handling */
+.expert-solution-content table {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    display: block;
+    border-collapse: collapse;
+    margin: 1rem 0;
+}
+
+.expert-solution-content table td,
+.expert-solution-content table th {
+    border: 1px solid #ddd;
+    padding: 8px 12px;
+    text-align: left;
+    vertical-align: top;
+    word-wrap: break-word;
+    max-width: 300px;
+}
+
+.expert-solution-content table th {
+    background-color: #f8f9fa;
+    font-weight: bold;
+}
+
+/* Image overflow handling */
+.expert-solution-content img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 1rem auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Video overflow handling */
+.expert-solution-content video {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 1rem auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Code block overflow handling */
+.expert-solution-content pre {
+    max-width: 100%;
+    overflow-x: auto;
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 6px;
+    padding: 1rem;
+    margin: 1rem 0;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.expert-solution-content code {
+    background-color: #f8f9fa;
+    padding: 2px 4px;
+    border-radius: 3px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.9rem;
+}
+
+/* Blockquote overflow handling */
+.expert-solution-content blockquote {
+    border-left: 4px solid #4285f4;
+    padding-left: 1rem;
+    margin: 1rem 0;
+    font-style: italic;
+    background-color: #f8f9fa;
+    padding: 1rem;
+    border-radius: 0 6px 6px 0;
+}
+
+/* List overflow handling */
+.expert-solution-content ul,
+.expert-solution-content ol {
+    padding-left: 1.5rem;
+    margin: 1rem 0;
+}
+
+.expert-solution-content li {
+    margin-bottom: 0.5rem;
+    word-wrap: break-word;
+}
+
+/* Heading overflow handling */
+.expert-solution-content h1,
+.expert-solution-content h2,
+.expert-solution-content h3,
+.expert-solution-content h4,
+.expert-solution-content h5,
+.expert-solution-content h6 {
+    margin: 1.5rem 0 1rem 0;
+    line-height: 1.3;
+    word-wrap: break-word;
+}
+
+/* Paragraph overflow handling */
+.expert-solution-content p {
+    margin: 1rem 0;
+    line-height: 1.6;
+    word-wrap: break-word;
+}
+
+/* Link overflow handling */
+.expert-solution-content a {
+    color: #4285f4;
+    text-decoration: underline;
+    word-break: break-word;
+}
+
+.expert-solution-content a:hover {
+    color: #2a5aa0;
+}
+
+/* Responsive adjustments for mobile */
+@media (max-width: 768px) {
+    .expert-solution-content table {
+        font-size: 0.9rem;
+    }
+    
+    .expert-solution-content table td,
+    .expert-solution-content table th {
+        padding: 6px 8px;
+        max-width: 200px;
+    }
+    
+    .expert-solution-content pre {
+        font-size: 0.8rem;
+        padding: 0.75rem;
+    }
+    
+    .expert-solution-content code {
+        font-size: 0.8rem;
+    }
+}
+
+/* Ensure content doesn't break the container */
+.expert-solution-content * {
+    max-width: 100%;
+    box-sizing: border-box;
+}

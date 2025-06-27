@@ -18,8 +18,15 @@ class CaseStudyAdmin(admin.ModelAdmin):
         ('Expert Solution', {
             'classes': ('collapse',),
             'fields': ('expert_solution',),
+            'description': 'Use the rich text editor below to create formatted expert solutions with images, tables, code snippets, and more.'
         }),
     )
+
+    class Media:
+        css = {
+            'all': ('css/admin_custom.css',)
+        }
+
 
 @admin.register(Notification)
 class NotificationAdmin(admin.ModelAdmin):

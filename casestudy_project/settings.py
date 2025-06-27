@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     'casestudies',
     'django.contrib.sitemaps',
     'storages',
+    'django_ckeditor_5',
 ]
 
 MIDDLEWARE = [
@@ -170,3 +171,134 @@ if not DEBUG:
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
     X_FRAME_OPTIONS = 'DENY'
+
+
+# CKEditor 5 Configuration
+customColorPalette = [
+    {'color': 'hsl(4, 90%, 58%)', 'label': 'Red'},
+    {'color': 'hsl(340, 82%, 52%)', 'label': 'Pink'},
+    {'color': 'hsl(291, 64%, 42%)', 'label': 'Purple'},
+    {'color': 'hsl(262, 52%, 47%)', 'label': 'Deep Purple'},
+    {'color': 'hsl(231, 48%, 48%)', 'label': 'Indigo'},
+    {'color': 'hsl(207, 90%, 54%)', 'label': 'Blue'},
+    {'color': '#4285f2', 'label': 'Google Blue'},
+    {'color': '#000000', 'label': 'Black'},
+    {'color': '#ffffff', 'label': 'White'},
+    {'color': 'hsl(142, 63%, 44%)', 'label': 'Green'},
+    {'color': 'hsl(39, 100%, 50%)', 'label': 'Orange'},
+    {'color': 'hsl(195, 100%, 40%)', 'label': 'Cyan'},
+    {'color': 'hsl(30, 70%, 53%)', 'label': 'Amber'},
+    {'color': 'hsl(260, 80%, 70%)', 'label': 'Lavender'},
+    {'color': 'hsl(15, 85%, 65%)', 'label': 'Coral'},
+]
+
+CKEDITOR_5_CONFIGS = {
+    'default': {
+        'toolbar': {
+            'items': ['heading', '|', 'bold', 'italic', 'link',
+                      'bulletedList', 'numberedList', 'blockQuote', 'imageUpload'],
+        }
+    },
+    'extends': {
+        'blockToolbar': [
+            'paragraph', 'heading1', 'heading2', 'heading3',
+            '|',
+            'bulletedList', 'numberedList',
+            '|',
+            'blockQuote',
+        ],
+        'toolbar': {
+            'items': [
+                'heading', '|', 'outdent', 'indent', '|', 'bold', 'italic', 'link', 'underline', 'strikethrough',
+                'code', 'subscript', 'superscript', 'highlight', '|', 'codeBlock', 'sourceEditing', 'insertImage',
+                'bulletedList', 'numberedList', 'todoList', '|', 'blockQuote', 'imageUpload', '|',
+                'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor', 'mediaEmbed', 'removeFormat',
+                'insertTable',
+            ],
+            'shouldNotGroupWhenFull': 'true'
+        },
+        'image': {
+            'toolbar': ['imageTextAlternative', '|', 'imageStyle:alignLeft',
+                        'imageStyle:alignRight', 'imageStyle:alignCenter', 'imageStyle:side', '|'],
+            'styles': [
+                'full',
+                'side',
+                'alignLeft',
+                'alignRight',
+                'alignCenter',
+            ]
+        },
+        'table': {
+            'contentToolbar': [
+                'tableColumn', 'tableRow', 'mergeTableCells',
+                'tableProperties', 'tableCellProperties'
+            ],
+            'tableProperties': {
+                'borderColors': customColorPalette,
+                'backgroundColors': customColorPalette
+            },
+            'tableCellProperties': {
+                'borderColors': customColorPalette,
+                'backgroundColors': customColorPalette
+            }
+        },
+        'heading': {
+            'options': [
+                {'model': 'paragraph', 'title': 'Paragraph', 'class': 'ck-heading_paragraph'},
+                {'model': 'heading1', 'view': 'h1', 'title': 'Heading 1', 'class': 'ck-heading_heading1'},
+                {'model': 'heading2', 'view': 'h2', 'title': 'Heading 2', 'class': 'ck-heading_heading2'},
+                {'model': 'heading3', 'view': 'h3', 'title': 'Heading 3', 'class': 'ck-heading_heading3'}
+            ]
+        },
+        'fontColor': {
+            'colors': customColorPalette,
+            'columns': 5,
+            'default': '#000000'  # Default font color set to black
+        },
+        'ui': {
+            'viewportOffset': {
+                'top': 0,
+                'bottom': 0
+            }
+        },'codeBlock': {
+    'languages': [
+        {'language': 'plaintext', 'label': 'Plain text'},
+        {'language': 'bash', 'label': 'Bash'},
+        {'language': 'python', 'label': 'Python'},
+        {'language': 'javascript', 'label': 'JavaScript'},
+        {'language': 'typescript', 'label': 'TypeScript'},
+        {'language': 'html', 'label': 'HTML'},
+        {'language': 'css', 'label': 'CSS'},
+        {'language': 'json', 'label': 'JSON'},
+        {'language': 'sql', 'label': 'SQL'},              # ✅ Ensure SQL is included
+        {'language': 'java', 'label': 'Java'},
+        {'language': 'c', 'label': 'C'},
+        {'language': 'cpp', 'label': 'C++'},
+        {'language': 'php', 'label': 'PHP'},
+        {'language': 'xml', 'label': 'XML'},
+        {'language': 'yaml', 'label': 'YAML'},
+        {'language': 'dockerfile', 'label': 'Dockerfile'},
+        {'language': 'powershell', 'label': 'PowerShell'},
+        {'language': 'perl', 'label': 'Perl'},
+        {'language': 'ruby', 'label': 'Ruby'},
+        {'language': 'r', 'label': 'R'},
+        {'language': 'go', 'label': 'Go'},
+        {'language': 'swift', 'label': 'Swift'},
+        {'language': 'kotlin', 'label': 'Kotlin'},
+        {'language': 'markdown', 'label': 'Markdown'},
+    ]
+}
+
+    },
+    'list': {
+        'properties': {
+            'styles': 'true',
+            'startIndex': 'true',
+            'reversed': 'true',
+        }
+    }
+}
+
+
+# Define file upload permissions
+CKEDITOR_5_FILE_UPLOAD_PERMISSION = "staff"

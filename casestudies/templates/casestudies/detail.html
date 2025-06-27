@@ -213,8 +213,8 @@
             </button>
             <div x-show="solutionVisible" x-cloak x-transition class="mt-6 p-8 border border-black rounded-lg bg-green-50">
                 <h2 class="text-3xl font-bold mb-4">Expert Solution</h2>
-                <div class="ibm-plex-section prose max-w-none text-base">
-                    {{ case_study.expert_solution|linebreaks }}
+                <div class="ibm-plex-section prose max-w-none text-base expert-solution-content">
+                    {{ case_study.expert_solution|safe }}
                 </div>
             </div>
         </div>
