@@ -302,3 +302,10 @@ CKEDITOR_5_CONFIGS = {
 
 # Define file upload permissions
 CKEDITOR_5_FILE_UPLOAD_PERMISSION = "staff"
+
+EMAIL_TIMEOUT = int(os.environ.get('EMAIL_TIMEOUT', 20))
+EMAIL_SUBJECT_PREFIX = os.environ.get('EMAIL_SUBJECT_PREFIX', '[Casestudies] ')
+EMAIL_USE_LOCALTIME = os.environ.get('EMAIL_USE_LOCALTIME', 'True').lower() == 'true'
+MANAGERS = [
+    (os.environ.get('MANAGER_NAME', 'Manager'), os.environ.get('MANAGER_EMAIL', 'manager@casestudies.local'))
+]

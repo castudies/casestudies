@@ -173,3 +173,5 @@ Thumbs.db
 .env.production.local
 
 casestudy_project/settings_local.py 
+EMAIL_CONFIGURATION.md
+EMAIL_BACKEND_SWITCHER.py

@@ -92,6 +92,8 @@
 
 .ck-editor__editable table td,
 .ck-editor__editable table th {
+    background: #fff !important;      /* White background for all cells */
+    color: #222 !important;           /* Dark text for all cells */
     border: 1px solid #ddd !important;
     padding: 8px 12px !important;
     text-align: left !important;
@@ -99,7 +101,7 @@
 }
 
 .ck-editor__editable table th {
-    background-color: #f8f9fa !important;
+    background: #f8f9fa !important;   /* Light gray for headers */
     font-weight: bold !important;
 }
 

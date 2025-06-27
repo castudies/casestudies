@@ -322,11 +322,11 @@ document.addEventListener("DOMContentLoaded", () => {
             <div class="p-5">
                 <div class="flex items-center gap-2 mb-3">
                     <span class="inline-block text-xs font-semibold px-2.5 py-1 rounded-full
-                               {% if case_study.difficulty == 'Easy' %}easy-green
-                               {% elif case_study.difficulty == 'Intermediate' %}intermediate-orange
-                               {% elif case_study.difficulty == 'Advanced' %}advanced-red
+                               {% if case_study.difficulty == 'beginner' %}easy-green
+                               {% elif case_study.difficulty == 'intermediate' %}intermediate-orange
+                               {% elif case_study.difficulty == 'advanced' %}advanced-red
                                {% else %}bg-pink-100 text-pink-700{% endif %}">
-                        {{ case_study.difficulty }}
+                        {{ case_study.difficulty|capfirst }}
                     </span>
                     <span class="inline-block bg-blue-100 text-primary text-xs font-semibold px-2.5 py-1 rounded-full">{{ case_study.domain }}</span>
                 </div>
@@ -400,7 +400,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <span x-show="open === 4">-</span>
                 </button>
                 <div x-show="open === 4" class="w-full pb-5 text-gray-700 text-base text-left" x-cloak>
-                    You can submit your case study through our <a href="{% url 'casestudies:send_case_study' %}" class="text-primary underline">submission page</a>. We review all submissions for quality and relevance before publishing.
+                    You can submit your case study through our <a href="{% url 'casestudies:submission_guideline' %}" class="text-primary underline">submission page</a>. We review all submissions for quality and relevance before publishing.
                 </div>
             </div>
             <!-- FAQ 5 -->

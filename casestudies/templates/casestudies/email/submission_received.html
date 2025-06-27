@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>New Case Study Submission</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+        .header { background: #000; color: white; padding: 20px; text-align: center; }
+        .content { padding: 20px; background: #f9f9f9; }
+        .button { display: inline-block; background: #000; color: white; padding: 12px 24px; text-decoration: none; border-radius: 5px; }
+        .footer { text-align: center; padding: 20px; color: #666; font-size: 14px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>New Case Study Submission</h1>
+        </div>
+        
+        <div class="content">
+            <p>Hello Admin,</p>
+            
+            <p>A new case study has been submitted and is awaiting your review.</p>
+            
+            <h3>Submission Details:</h3>
+            <ul>
+                <li><strong>Title:</strong> {{ case_study.title }}</li>
+                <li><strong>Author:</strong> {{ case_study.author }}</li>
+                <li><strong>Email:</strong> {{ case_study.submitter_email }}</li>
+                <li><strong>Domain:</strong> {{ case_study.domain }}</li>
+                <li><strong>Difficulty:</strong> {{ case_study.difficulty }}</li>
+                <li><strong>Submitted:</strong> {{ case_study.submitted_at|date:"F j, Y g:i A" }}</li>
+            </ul>
+            
+            <p><strong>Case Background:</strong><br>
+            {{ case_study.case_background|truncatewords:50 }}</p>
+            
+            <p><strong>Task:</strong><br>
+            {{ case_study.task|truncatewords:50 }}</p>
+            
+            <div style="text-align: center; margin: 30px 0;">
+                <a href="{{ admin_url }}" class="button">Review Submission</a>
+            </div>
+            
+            <p>Please review this submission and either approve or reject it with appropriate feedback.</p>
+        </div>
+        
+        <div class="footer">
+            <p>This is an automated notification from Casestudies.</p>
+        </div>
+    </div>
+</body>
+</html> 

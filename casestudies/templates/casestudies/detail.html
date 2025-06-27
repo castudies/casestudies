@@ -95,17 +95,23 @@
         <div class="flex items-center gap-2 mb-4">
             <a href="{% url 'casestudies:case_study_list' %}?difficulty={{ case_study.difficulty }}" 
                class="inline-block text-xs font-semibold px-2.5 py-1 rounded-full hover:opacity-80 transition-colors
-                      {% if case_study.difficulty == 'Easy' %}easy-green
-                      {% elif case_study.difficulty == 'Intermediate' %}intermediate-orange
-                      {% elif case_study.difficulty == 'Advanced' %}advanced-red
+                      {% if case_study.difficulty == 'beginner' %}easy-green
+                      {% elif case_study.difficulty == 'intermediate' %}intermediate-orange
+                      {% elif case_study.difficulty == 'advanced' %}advanced-red
                       {% else %}bg-pink-100 text-pink-700{% endif %}">
                 {{ case_study.difficulty }}
             </a>
-            <a href="{% url 'casestudies:case_study_list' %}?domain={{ case_study.domain }}" class="inline-block bg-blue-100 text-primary text-xs font-semibold px-2.5 py-1 rounded-full hover:bg-blue-200 transition-colors">{{ case_study.domain }}</a>
+            <a href="{% url 'casestudies:case_study_list' %}?domain={{ case_study.domain|urlencode }}" class="inline-block bg-blue-100 text-primary text-xs font-semibold px-2.5 py-1 rounded-full hover:bg-blue-200 transition-colors">{{ case_study.domain }}</a>
         </div>
         <h1 class="text-4xl md:text-5xl font-extrabold mb-2 leading-tight tracking-tight">{{ case_study.title }}</h1>
         <div class="flex flex-wrap items-center text-sm text-gray-500">
-            <span>{{ case_study.created_at|date:"F j, Y" }}</span>
+            <span>
+                {% if case_study.created_at %}
+                    {{ case_study.created_at|date:"F j, Y" }}
+                {% elif case_study.submitted_at %}
+                    {{ case_study.submitted_at|date:"F j, Y" }}
+                {% endif %}
+            </span>
             {% if case_study.author %}
                 <span class="ml-4">Publisher- 
                     {% if case_study.author_url %}
@@ -242,9 +248,9 @@
                     <div class="p-4">
                         <div class="flex items-center gap-2 mb-3">
                             <span class="inline-block text-xs font-semibold px-2.5 py-1 rounded-full
-                                       {% if similar_case.difficulty == 'Easy' %}easy-green
-                                       {% elif similar_case.difficulty == 'Intermediate' %}intermediate-orange
-                                       {% elif similar_case.difficulty == 'Advanced' %}advanced-red
+                                       {% if similar_case.difficulty == 'beginner' %}easy-green
+                                       {% elif similar_case.difficulty == 'intermediate' %}intermediate-orange
+                                       {% elif similar_case.difficulty == 'advanced' %}advanced-red
                                        {% else %}bg-pink-100 text-pink-700{% endif %}">
                                 {{ similar_case.difficulty }}
                             </span>
@@ -261,7 +267,7 @@
             </div>
             
             <div class="mt-8 text-center">
-                <a href="{% url 'casestudies:case_study_list' %}?domain={{ case_study.domain }}" class="inline-flex items-center bg-primary text-white font-semibold py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors">
+                <a href="{% url 'casestudies:case_study_list' %}?domain={{ case_study.domain|urlencode }}" class="inline-flex items-center bg-primary text-white font-semibold py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors">
                     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                     </svg>
