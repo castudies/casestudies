@@ -1,0 +1,26 @@
+name: Run Django Migrations on Railway
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Install Railway CLI
+      run: |
+        curl -fsSL https://railway.com/install.sh | sh
+
+    - name: Login to Railway CLI
+      env:
+        RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+      run: railway login --token $RAILWAY_TOKEN
+
+    - name: Run migrations on Railway
+      run: railway run python manage.py migrate
