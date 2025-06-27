@@ -20,4 +20,4 @@ jobs:
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
         run: |
-          railway run python manage.py migrate
+          railway run --service casestudies python manage.py migrate
