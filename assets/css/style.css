@@ -839,6 +839,7 @@ textarea.input-field {
     grid-template-columns: 1fr;
     gap: 1rem;
     margin-top: 2rem;
+    position: relative;
 }
 
 .impact-item {
@@ -855,6 +856,71 @@ textarea.input-field {
 .impact-label {
     color: #6b7280;
     font-size: 0.875rem;
+}
+
+.impact-info-btn {
+    position: absolute;
+    top: 0.2em;
+    right: 0.2em;
+    cursor: pointer;
+    z-index: 2;
+    display: inline-block;
+}
+
+.impact-info-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.7em;
+    height: 1.7em;
+    background: #222;
+    color: #fff;
+    border-radius: 50%;
+    font-weight: bold;
+    font-size: 1.1em;
+    border: 1.5px solid #4285f2;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transition: background 0.2s, color 0.2s;
+}
+
+.impact-info-btn:hover .impact-info-icon,
+.impact-info-btn:focus .impact-info-icon {
+    background: #4285f2;
+    color: #fff;
+}
+
+.impact-info-tooltip {
+    display: none;
+    position: absolute;
+    top: 2.2em;
+    right: 0;
+    min-width: 220px;
+    max-width: 320px;
+    background: #222;
+    color: #fff;
+    padding: 0.8em 1em;
+    border-radius: 8px;
+    font-size: 0.95em;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+    text-align: left;
+    z-index: 10;
+}
+
+.impact-info-btn:hover .impact-info-tooltip,
+.impact-info-btn:focus .impact-info-tooltip {
+    display: block;
+}
+
+@media (max-width: 600px) {
+    .impact-info-btn {
+        top: 1em;
+        right: 1em;
+    }
+    .impact-info-tooltip {
+        right: -1em;
+        min-width: 160px;
+        font-size: 0.85em;
+    }
 }
 
 /* Mobile styles */
@@ -1057,4 +1123,48 @@ textarea.input-field {
         max-width: unset;
         padding: 1rem;
     }
+}
+
+.impact-label-info {
+  display: inline-block;
+  margin-left: 0.4em;
+  vertical-align: middle;
+  position: static !important;
+  top: auto !important;
+  right: auto !important;
+}
+.impact-label-info .impact-info-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #fff;
+  border: 1.5px solid #222;
+  color: #222;
+  font-size: 13px;
+  font-weight: 700;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border 0.2s;
+  line-height: 1;
+  user-select: none;
+}
+.impact-label-info .impact-info-icon:hover,
+.impact-label-info:focus .impact-info-icon {
+  background: #222;
+  color: #fff;
+  border-color: #222;
+}
+.impact-label-info .impact-info-tooltip {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 180px;
+  max-width: 240px;
+  font-size: 0.95em;
+  z-index: 10;
+  margin-top: 0.5em;
 }
