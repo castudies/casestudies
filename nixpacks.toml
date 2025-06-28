@@ -1,5 +1,38 @@
 [phases.setup]
-nixPkgs = ["nodejs", "file", "zlib"]
+nixPkgs = ["nodejs", "python312", "file", "zlib"]
 
 [phases.install]
 dependsOn = ["setup"]
+# Set LD_LIBRARY_PATH *before* your Python commands in the install phase
+# Nixpacks should already add /nix/store/<hash>-file-<version>/lib to the PATH or LD_LIBRARY_PATH,
+# but sometimes explicitly ensuring standard system paths are searched helps.
+# For Nixpacks, `file` being in `nixPkgs` should make it discoverable for processes launched
+# by Nixpacks. The common issue is how Python itself picks up these paths.
+
+# Let's try adding a command to explicitly link/point to the libmagic location.
+# This requires knowing the dynamic path, which is tricky.
+# A more direct approach in Nixpacks for this specific problem is often:
+# 1. Ensure `file` is in `nixPkgs`.
+# 2. Make sure the build environment uses the correct shell where Nix paths are set.
+
+# Let's try to make the `file` package directly available in the build environment.
+# Nixpacks usually handles this, but a common workaround for "lib not found" in Nix
+# is to ensure the Python process sees the libraries.
+
+# Option 1 (Recommended for Nixpacks): Trust Nixpacks to set up the environment,
+# but ensure `file` is in `nixPkgs` and rebuild. Your initial config *should*
+# have worked for this. The fact it didn't means the environment for the `RUN` command
+# might not be fully picking up Nix's library paths.
+
+# Let's try the `LD_LIBRARY_PATH` in the `install` phase directly:
+env = { LD_LIBRARY_PATH = "/usr/lib:/usr/local/lib:$LD_LIBRARY_PATH" } # Include common system library paths
+cmd = """
+pip install -r requirements.txt
+# Optional: Add a debug command to see where libmagic is
+find $(nix-build '<nixpkgs>' -A file --no-out-link)/lib -name "libmagic.so*" || echo "libmagic not found in file package build"
+python manage.py collectstatic --no-input
+python manage.py migrate
+"""
+
+[phases.start]
+cmd = "python manage.py runserver 0.0.0.0:$PORT"
