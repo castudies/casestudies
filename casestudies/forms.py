@@ -4,7 +4,6 @@ from django.core.files.uploadedfile import UploadedFile
 import os
 import re
 from PIL import Image
-import magic  # You may need to install python-magic for MIME type checking
 from django.core.files.base import ContentFile
 
 ALLOWED_DATASET_EXTENSIONS = ['.csv', '.xlsx', '.xls', '.txt']
@@ -20,6 +19,24 @@ def sanitize_filename(filename):
     filename = os.path.basename(filename)
     filename = re.sub(r'[^\w\-.]', '_', filename)
     return filename
+
+# Helper function to check file type using extension and content type
+def validate_file_type(file, allowed_extensions, allowed_mime_types):
+    """
+    Validate file type using both extension and content type.
+    Returns True if valid, raises ValidationError if invalid.
+    """
+    # Check extension
+    ext = os.path.splitext(file.name)[1].lower()
+    if ext not in allowed_extensions:
+        raise forms.ValidationError(f'Invalid file extension. Allowed extensions: {", ".join(allowed_extensions)}')
+    
+    # Check content type if available
+    if hasattr(file, 'content_type') and file.content_type:
+        if file.content_type not in allowed_mime_types:
+            raise forms.ValidationError(f'Invalid file type. Allowed types: {", ".join(allowed_mime_types)}')
+    
+    return True
 
 class CaseStudySubmissionForm(forms.ModelForm):
     class Meta:
@@ -71,18 +88,28 @@ class CaseStudySubmissionForm(forms.ModelForm):
             # Check file size
             if dataset.size > 5 * 1024 * 1024:
                 raise forms.ValidationError('Dataset file size must not exceed 5 MB.')
-            # Check extension
-            ext = os.path.splitext(dataset.name)[1].lower()
-            if ext not in ALLOWED_DATASET_EXTENSIONS:
-                raise forms.ValidationError('Only CSV, Excel, and TXT files are allowed.')
-            # Check MIME type using magic
+            
+            # Validate file type using extension and content type
             try:
-                mime = magic.from_buffer(dataset.read(2048), mime=True)
-                dataset.seek(0)
-            except Exception:
-                raise forms.ValidationError('Could not determine file type. Please upload a valid file.')
-            if mime not in ALLOWED_DATASET_MIME_TYPES:
-                raise forms.ValidationError('Invalid file type. Only CSV, Excel, and TXT files are allowed.')
+                validate_file_type(dataset, ALLOWED_DATASET_EXTENSIONS, ALLOWED_DATASET_MIME_TYPES)
+            except forms.ValidationError as e:
+                raise e
+            
+            # Additional validation for specific file types
+            ext = os.path.splitext(dataset.name)[1].lower()
+            if ext == '.csv':
+                # For CSV files, we can do additional validation if needed
+                try:
+                    # Read first few bytes to check if it looks like CSV
+                    dataset.seek(0)
+                    first_bytes = dataset.read(1024).decode('utf-8', errors='ignore')
+                    dataset.seek(0)
+                    # Basic CSV validation - check if it contains commas or semicolons
+                    if not (',' in first_bytes or ';' in first_bytes):
+                        raise forms.ValidationError('File does not appear to be a valid CSV file.')
+                except UnicodeDecodeError:
+                    raise forms.ValidationError('File encoding is not supported. Please use UTF-8 encoding.')
+            
             # Sanitize filename
             dataset.name = sanitize_filename(dataset.name)
         return dataset
@@ -97,12 +124,32 @@ class CaseStudySubmissionForm(forms.ModelForm):
             if isinstance(thumbnail, UploadedFile):
                 if not thumbnail.content_type in ['image/jpeg', 'image/png', 'image/jp2']:
                     raise forms.ValidationError('Only JPG, JPEG2000, and PNG images are allowed.')
-            # Validate image content using Pillow
+            # Validate image content and dimensions using Pillow
             try:
                 image = Image.open(thumbnail)
                 image.verify()  # Will raise if not a valid image
-                thumbnail.seek(0)
-            except Exception:
+                thumbnail.seek(0)  # Reset file pointer after verify
+                
+                # Check image dimensions
+                image = Image.open(thumbnail)  # Open again for dimension checking
+                width, height = image.size
+                
+                # Set reasonable limits for thumbnail images
+                MAX_WIDTH = 2048
+                MAX_HEIGHT = 2048
+                MIN_WIDTH = 50
+                MIN_HEIGHT = 50
+                
+                if width > MAX_WIDTH or height > MAX_HEIGHT:
+                    raise forms.ValidationError(f'Image dimensions must not exceed {MAX_WIDTH}x{MAX_HEIGHT} pixels. Current size: {width}x{height}')
+                
+                if width < MIN_WIDTH or height < MIN_HEIGHT:
+                    raise forms.ValidationError(f'Image dimensions must be at least {MIN_WIDTH}x{MIN_HEIGHT} pixels. Current size: {width}x{height}')
+                
+                thumbnail.seek(0)  # Reset file pointer
+            except Exception as e:
+                if isinstance(e, forms.ValidationError):
+                    raise e
                 raise forms.ValidationError('Uploaded file is not a valid image.')
             # Sanitize filename
             thumbnail.name = sanitize_filename(thumbnail.name)
