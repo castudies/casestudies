@@ -3,8 +3,6 @@ nixPkgs = [
   "file",
   "libmagic",
   "libmagic-dev",
-  "file-dev",
-  "libmagic-full",
   "zlib",
   "zlib-dev"
 ]
