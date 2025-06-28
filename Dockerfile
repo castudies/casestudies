@@ -31,5 +31,5 @@ RUN python manage.py collectstatic --noinput
 
 EXPOSE 8000
 
-# Run migrations and start server
-CMD python manage.py migrate && gunicorn casestudy_project.wsgi:application --bind 0.0.0.0:8000 
+# Run migrations and start server using Railway's PORT
+CMD python manage.py migrate && gunicorn casestudy_project.wsgi:application --bind 0.0.0.0:$PORT 
