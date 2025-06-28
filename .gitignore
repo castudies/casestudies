@@ -175,5 +175,3 @@ Thumbs.db
 casestudy_project/settings_local.py 
 EMAIL_CONFIGURATION.md
 EMAIL_BACKEND_SWITCHER.py
-Dockerfile
-railway.json

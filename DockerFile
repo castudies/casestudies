@@ -1,0 +1,19 @@
+FROM python:3.12-slim
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libmagic1 file gcc build-essential && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Set working directory
+WORKDIR /app
+
+# Copy project files
+COPY . .
+
+# Install Python dependencies
+RUN pip install --upgrade pip
+RUN pip install -r requirements.txt
+
+# ✅ Test if libmagic is working properly (optional)
+RUN python -c "import magic; print(magic.from_buffer(b'hello world'))"
