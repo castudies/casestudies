@@ -20,7 +20,7 @@ jobs:
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
         run: |
-          railway link -p <569f0d9c-028a-48e2-a7ca-1d50509795c5> -e production
+          railway link -p 569f0d9c-028a-48e2-a7ca-1d50509795c5 -e production
 
       - name: Run migrations on Railway service
         env:
