@@ -156,7 +156,7 @@ class NotificationAdmin(admin.ModelAdmin):
     search_fields = ("title", "body", "button_text")
     fieldsets = (
         (None, {
-            'fields': ("title", "body", "video", "is_active", "delay_seconds")
+            'fields': ("title", "body", "is_active", "delay_seconds")
         }),
         ("Button", {
             'fields': ("button_text", "button_link")

@@ -1,0 +1,172 @@
+{% extends 'casestudies/base.html' %}
+{% load static %}
+{% block title %}Support This Project - Case Studies{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<div class="support-hero">
+    <div style="text-align: center;">
+        <h1>Support This Project</h1>
+        <p>Help us continue building the world's best case study platform for business professionals and students.</p>
+    </div>
+</div>
+
+<!-- Support Options Section -->
+<div class="support-container">
+    <div class="support-card">
+        <h2>Ways to Support</h2>
+        
+        <div>
+            <!-- Buy me a coffee -->
+            <div class="support-item">
+                <div class="support-item-content">
+                    <div class="support-icon">☕</div>
+                    <div class="support-text">
+                        <h3>Buy me a coffee</h3>
+                        <p>Support the project with a small donation</p>
+                    </div>
+                </div>
+                <a href="https://ko-fi.com/mushfikurahmaan" target="_blank" class="support-button">
+                    Support
+                </a>
+            </div>
+
+            <!-- Donate -->
+            <div class="support-item">
+                <div class="support-item-content">
+                    <div class="support-icon">💰</div>
+                    <div class="support-text">
+                        <h3>Donate</h3>
+                        <p>GitHub Sponsors, Ko-fi, or PayPal</p>
+                    </div>
+                </div>
+                <div class="support-button-group">
+                    <a href="https://github.com/sponsors/castudies" target="_blank" class="support-button support-button-small">
+                        GitHub
+                    </a>
+                    <a href="https://ko-fi.com/mushfikurahmaan" target="_blank" class="support-button support-button-small">
+                        Ko-fi
+                    </a>
+                    <a href="#" target="_blank" class="support-button support-button-small">
+                        PayPal
+                    </a>
+                </div>
+            </div>
+
+            <!-- Star the GitHub repo -->
+            <div class="support-item">
+                <div class="support-item-content">
+                    <div class="support-icon">🌟</div>
+                    <div class="support-text">
+                        <h3>Star the GitHub repo</h3>
+                        <p>Show your support by starring the repository</p>
+                    </div>
+                </div>
+                <a href="https://github.com/castudies/casestudies" target="_blank" class="support-button">
+                    Star
+                </a>
+            </div>
+
+            <!-- Share the site -->
+            <div class="support-item">
+                <div class="support-item-content">
+                    <div class="support-icon">📣</div>
+                    <div class="support-text">
+                        <h3>Share the site</h3>
+                        <p>Post about us on LinkedIn, Reddit, Twitter, or personal blogs</p>
+                    </div>
+                </div>
+                <div class="support-button-group">
+                    <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ request.build_absolute_uri }}" target="_blank" class="support-button support-button-small">
+                        LinkedIn
+                    </a>
+                    <a href="https://twitter.com/intent/tweet?text=Check out this amazing case study platform!&url={{ request.build_absolute_uri }}" target="_blank" class="support-button support-button-small">
+                        Twitter
+                    </a>
+                    <a href="https://reddit.com/submit?url={{ request.build_absolute_uri }}&title=Amazing Case Study Platform" target="_blank" class="support-button support-button-small">
+                        Reddit
+                    </a>
+                </div>
+            </div>
+
+            <!-- Contribute case studies -->
+            <div class="support-item">
+                <div class="support-item-content">
+                    <div class="support-icon">📤</div>
+                    <div class="support-text">
+                        <h3>Contribute case studies</h3>
+                        <p>Submit your own case study to help others learn</p>
+                    </div>
+                </div>
+                <a href="{% url 'casestudies:submit_case_study' %}" class="support-button">
+                    Submit
+                </a>
+            </div>
+
+            <!-- Report bugs / suggest features -->
+            <div class="support-item">
+                <div class="support-item-content">
+                    <div class="support-icon">🐛</div>
+                    <div class="support-text">
+                        <h3>Report bugs / suggest features</h3>
+                        <p>Open an issue or message us</p>
+                    </div>
+                </div>
+                <a href="https://github.com/castudies/casestudies/issues" target="_blank" class="support-button">
+                    Issues
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Why Support Section -->
+<div class="support-container">
+    <div class="support-card">
+        <h2>Why Support Us?</h2>
+        <div class="support-grid">
+            <div>
+                <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem; color: #4285f2;">Free Access</h3>
+                <p style="line-height: 1.6; color: #374151;">We believe knowledge should be accessible to everyone. Your support helps us keep this platform free for students and professionals worldwide.</p>
+            </div>
+            <div>
+                <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem; color: #4285f2;">Quality Content</h3>
+                <p style="line-height: 1.6; color: #374151;">Your contributions help us maintain high standards and continue curating the best case studies from around the world.</p>
+            </div>
+            <div>
+                <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem; color: #4285f2;">Community Growth</h3>
+                <p style="line-height: 1.6; color: #374151;">Support helps us build a stronger community of learners and professionals who share knowledge and insights.</p>
+            </div>
+            <div>
+                <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem; color: #4285f2;">Platform Development</h3>
+                <p style="line-height: 1.6; color: #374151;">Your support enables us to add new features, improve the user experience, and expand our case study library.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Impact Section -->
+<div class="support-container">
+    <div class="support-card" style="text-align: center;">
+        <h2>Your Impact</h2>
+        <p style="font-size: 1.125rem; color: #374151; margin-bottom: 1.5rem;">
+            Every contribution, no matter how small, helps us continue our mission of empowering 
+            professionals and students with real-world business insights.
+        </p>
+        <div class="support-impact-grid">
+            <div class="impact-item">
+                <div class="impact-number">1000+</div>
+                <p class="impact-label">Active Learners</p>
+            </div>
+            <div class="impact-item">
+                <div class="impact-number">50+</div>
+                <p class="impact-label">Case Studies</p>
+            </div>
+            <div class="impact-item">
+                <div class="impact-number">24/7</div>
+                <p class="impact-label">Free Access</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

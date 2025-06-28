@@ -708,3 +708,353 @@ textarea.input-field {
 .messages .info {
     @apply bg-blue-100 text-blue-800 border-blue-200;
 }
+
+.messages .info {
+    background-color: #dbeafe;
+    color: #1e40af;
+    border: 1px solid #93c5fd;
+}
+
+/* ========== Support Page Styles ========== */
+.support-hero {
+    background: #ffffff;
+    margin-top: 1rem;
+    padding: 1.5rem 1rem;
+    border-radius: 1rem;
+    max-width: 72rem;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 2rem;
+}
+
+.support-hero h1 {
+    font-size: 2.25rem;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    margin-bottom: 1.5rem;
+    line-height: 1.1;
+}
+
+.support-hero p {
+    font-size: 1.125rem;
+    color: #4b5563;
+    max-width: 48rem;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.support-container {
+    max-width: 64rem;
+    margin: 0 auto 3rem auto;
+    padding: 0 1rem;
+}
+
+.support-card {
+    background: white;
+    border-radius: 0.5rem;
+    border: 1px solid black;
+    padding: 2rem;
+}
+
+.support-card h2 {
+    font-size: 1.875rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.support-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5rem;
+    margin-bottom: 1.5rem;
+    transition: box-shadow 0.2s;
+}
+
+.support-item:hover {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.support-item-content {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.support-icon {
+    font-size: 1.875rem;
+}
+
+.support-text h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+.support-text p {
+    color: #6b7280;
+    font-size: 0.875rem;
+}
+
+.support-button {
+    background: white;
+    color: black;
+    border-radius: 9999px;
+    padding: 0.5rem 1.5rem;
+    font-weight: 600;
+    border: 2px solid black;
+    text-decoration: none;
+    transition: all 0.2s;
+    display: inline-block;
+    text-align: center;
+}
+
+.support-button:hover {
+    box-shadow: 4px 4px 0 0 #000;
+    transform: translate(-1px, -1px);
+}
+
+.support-button-group {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.support-button-small {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+}
+
+.support-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+
+.support-impact-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.impact-item {
+    text-align: center;
+}
+
+.impact-number {
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: #4285f2;
+    margin-bottom: 0.5rem;
+}
+
+.impact-label {
+    color: #6b7280;
+    font-size: 0.875rem;
+}
+
+/* Mobile styles */
+@media (max-width: 640px) {
+    .support-hero h1 {
+        font-size: 1.875rem;
+    }
+    
+    .support-hero p {
+        font-size: 1rem;
+    }
+    
+    .support-card {
+        padding: 1rem;
+    }
+    
+    .support-card h2 {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .support-item {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1rem;
+        margin-bottom: 1rem;
+    }
+    
+    .support-item-content {
+        margin-bottom: 1rem;
+        width: 100%;
+    }
+    
+    .support-icon {
+        font-size: 1.5rem;
+    }
+    
+    .support-text h3 {
+        font-size: 1.125rem;
+    }
+    
+    .support-text p {
+        font-size: 0.75rem;
+    }
+    
+    .support-button {
+        width: 100%;
+        padding: 0.5rem 1rem;
+        font-size: 0.875rem;
+    }
+    
+    .support-button-group {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .support-button-small {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.75rem;
+    }
+    
+    .impact-number {
+        font-size: 1.875rem;
+    }
+    
+    .impact-label {
+        font-size: 0.75rem;
+    }
+}
+
+/* Tablet styles */
+@media (min-width: 641px) and (max-width: 768px) {
+    .support-hero h1 {
+        font-size: 2rem;
+    }
+    
+    .support-card {
+        padding: 1.5rem;
+    }
+    
+    .support-item {
+        padding: 1.25rem;
+    }
+}
+
+/* Desktop styles */
+@media (min-width: 769px) {
+    .support-hero {
+        padding: 3.5rem 1rem;
+    }
+    
+    .support-hero h1 {
+        font-size: 3rem;
+    }
+    
+    .support-hero p {
+        font-size: 1.25rem;
+    }
+    
+    .support-card {
+        padding: 2rem;
+    }
+    
+    .support-card h2 {
+        font-size: 1.875rem;
+    }
+    
+    .support-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+    }
+    
+    .support-impact-grid {
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 1.5rem;
+    }
+    
+    .impact-number {
+        font-size: 2.5rem;
+    }
+}
+
+/* ========== Notification Popup Styles ========== */
+.notification-popup {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 9999;
+    max-width: 350px;
+    background: #000000;
+    color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 32px rgba(0,0,0,0.25);
+    padding: 1.5rem 1.5rem 1rem 1.5rem;
+    border: 1px solid #333;
+    animation: fadeInUp 0.4s;
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(40px);}
+    to { opacity: 1; transform: translateY(0);}
+}
+
+.notification-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.notification-title {
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-bottom: 0.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.notification-title::before {
+    content: '🌟';
+    font-size: 1.2em;
+}
+
+.notification-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.notification-btn {
+    background: #fff;
+    color: #000000;
+    border: none;
+    border-radius: 6px;
+    padding: 0.4rem 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+
+.notification-btn:hover {
+    background: #4285f2;
+    color: #fff;
+}
+
+.notification-dismiss {
+    background: #222;
+    color: #fff;
+}
+
+.notification-dismiss:hover {
+    background: #444;
+}
+
+@media (max-width: 600px) {
+    .notification-popup {
+        right: 1rem;
+        left: 1rem;
+        bottom: 1rem;
+        max-width: unset;
+        padding: 1rem;
+    }
+}

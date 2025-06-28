@@ -101,7 +101,6 @@ class CaseStudy(models.Model):
 class Notification(models.Model):
     title = models.CharField(max_length=200, help_text="Main heading for the notification pop-up.")
     body = models.TextField(help_text="Body text for the notification pop-up.")
-    video = models.FileField(upload_to='notifications/', blank=True, null=True, help_text="Optional video for the notification pop-up.")
     button_text = models.CharField(max_length=100, default="Share", help_text="Text for the notification button.")
     button_link = models.URLField(max_length=300, blank=True, help_text="URL the button should link to.")
     is_active = models.BooleanField(default=True, help_text="Show this notification on the homepage?")
