@@ -1,13 +1,12 @@
 [phases.setup]
-nixPkgs = ["nodejs", "file", "zlib"]
+nixPkgs = ["nodejs", "python312", "file", "zlib"]
 
 [phases.install]
 dependsOn = ["setup"]
-env = { LD_LIBRARY_PATH = "/usr/lib:/usr/local/lib:$LD_LIBRARY_PATH" }
-# ONLY install Python requirements here.
-# collectstatic and migrate are handled by your Railway pre-deploy command.
+# Dynamically get the path to the 'file' package's lib directory and add it to LD_LIBRARY_PATH
+# This command specifically gets the output path of the 'file' package.
+# The 'install' phase ensures this environment variable is set BEFORE pip installs and Django runs.
+env = { LD_LIBRARY_PATH = "$(nix-build '<nixpkgs>' -A file --no-out-link)/lib:$LD_LIBRARY_PATH" }
 cmd = "pip install -r requirements.txt"
 
-# Ensure this section is removed if you're using a Procfile for start command
-# [phases.start]
-# cmd = "python manage.py runserver 0.0.0.0:$PORT"
+# Make sure you've removed the [phases.start] section if you're using a Procfile.
