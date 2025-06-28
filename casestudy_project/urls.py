@@ -14,6 +14,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+import os
 from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
@@ -26,8 +27,10 @@ from django.views.static import serve
 from casestudies.models import CaseStudy
 from casestudies.views import custom_404
 
+secret_admin_path = os.environ.get('SECRET_ADMIN_PATH')
+
 urlpatterns = [
-    path("63f4ul7/", admin.site.urls),
+    path(f"{secret_admin_path}/", admin.site.urls),
     path('admin/', custom_404, name='admin_404'),
     path('', include('casestudies.urls')),
     path("ckeditor5/", include('django_ckeditor_5.urls')),
