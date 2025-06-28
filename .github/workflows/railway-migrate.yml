@@ -16,6 +16,11 @@ jobs:
       - name: Install Railway CLI
         run: curl -fsSL https://railway.com/install.sh | sh
 
+      - name: Login to Railway
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+        run: echo $RAILWAY_TOKEN | railway login
+
       - name: Set up Railway project link
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
