@@ -1,8 +1,5 @@
 [phases.setup]
-nixPkgs = [
-  "file",
-  "libmagic",
-  "libmagic-dev",
-  "zlib",
-  "zlib-dev"
-]
+nixPkgs = ["file", "zlib"]
+
+[phases.install]
+dependsOn = ["setup"]
