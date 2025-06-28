@@ -1,5 +1,5 @@
 [phases.setup]
-nixPkgs = ["file", "zlib"]
+nixPkgs = ["nodejs", "file", "zlib"]
 
 [phases.install]
 dependsOn = ["setup"]
