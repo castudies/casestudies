@@ -296,7 +296,7 @@
                     Drop your image here, or <span style="color: #2563eb; text-decoration: underline; cursor: pointer;">browse</span>
                 </label>
                 <div style="margin-top: 8px; color: #64748b; font-size: 0.95rem;">
-                    Supports: JPG, JPEG2000, PNG &nbsp;|&nbsp; Max size: 2MB
+                    Supports: JPG, JPEG2000, PNG &nbsp;|&nbsp; Max size: 2MB &nbsp;|&nbsp; Dimensions: 50px-2048px
                 </div>
                 <div style="margin-top: 18px; width: 100%; max-width: 420px; overflow-x: auto;">
                     <div style="width: 100%; max-width: 100%;">
@@ -427,24 +427,70 @@ function validateStep(step) {
         const errorThumb = document.getElementById('error-thumbnail');
         errorThumb.innerHTML = '';
         let thumbValid = true;
+        
         if (!thumb.files || thumb.files.length === 0) {
             errorThumb.innerHTML = '<li>Please upload a thumbnail image.</li>';
             valid = false;
             thumbValid = false;
         } else {
             const file = thumb.files[0];
+            
+            // Check file type
             const allowed = ['image/jpeg','image/png','image/jp2'];
             if (!allowed.includes(file.type)) {
                 errorThumb.innerHTML = '<li>Only JPG, JPEG2000, and PNG images are allowed.</li>';
                 valid = false;
                 thumbValid = false;
             }
+            
+            // Check file size
             if (file.size > 2*1024*1024) {
                 errorThumb.innerHTML = '<li>Thumbnail image size must not exceed 2 MB.</li>';
                 valid = false;
                 thumbValid = false;
             }
+            
+            // Check image dimensions (async validation)
+            if (thumbValid) {
+                return new Promise((resolve) => {
+                    const img = new Image();
+                    img.onload = function () {
+                        const width = img.width;
+                        const height = img.height;
+                        
+                        // Dimension limits (same as backend)
+                        const MAX_WIDTH = 2048;
+                        const MAX_HEIGHT = 2048;
+                        const MIN_WIDTH = 50;
+                        const MIN_HEIGHT = 50;
+                        
+                        // Check maximum dimensions
+                        if (width > MAX_WIDTH || height > MAX_HEIGHT) {
+                            errorThumb.innerHTML = `<li>Image dimensions must not exceed ${MAX_WIDTH}x${MAX_HEIGHT} pixels. Current size: ${width}x${height}</li>`;
+                            resolve(false);
+                            return;
+                        }
+                        
+                        // Check minimum dimensions
+                        if (width < MIN_WIDTH || height < MIN_HEIGHT) {
+                            errorThumb.innerHTML = `<li>Image dimensions must be at least ${MIN_WIDTH}x${MIN_HEIGHT} pixels. Current size: ${width}x${height}</li>`;
+                            resolve(false);
+                            return;
+                        }
+                        
+                        resolve(true);
+                    };
+                    
+                    img.onerror = function () {
+                        errorThumb.innerHTML = '<li>The uploaded file is not a valid image or it\'s corrupted.</li>';
+                        resolve(false);
+                    };
+                    
+                    img.src = URL.createObjectURL(file);
+                });
+            }
         }
+        
         // Dataset (optional, but if present, validate)
         const dataset = document.getElementById('id_dataset');
         const errorDataset = document.getElementById('error-dataset');
@@ -461,6 +507,7 @@ function validateStep(step) {
                 valid = false;
             }
         }
+        
         // Prevent proceeding if thumbnail is not valid
         if (!thumbValid) return false;
     }
@@ -493,12 +540,22 @@ function goToStep(step) {
     if (currentStep === 4) fillConfirmation();
 }
 
-document.querySelectorAll('.next-btn').forEach(btn => btn.onclick = function(e) {
+document.querySelectorAll('.next-btn').forEach(btn => btn.onclick = async function(e) {
     // Only allow advancing if validation passes
-    if (!validateStep(currentStep)) {
+    const validationResult = validateStep(currentStep);
+    
+    // Handle async validation for step 3
+    if (currentStep === 3 && validationResult instanceof Promise) {
+        const isValid = await validationResult;
+        if (!isValid) {
+            e.preventDefault();
+            return false;
+        }
+    } else if (!validationResult) {
         e.preventDefault();
         return false;
     }
+    
     goToStep(currentStep + 1);
 });
 document.querySelectorAll('.prev-btn').forEach(btn => btn.onclick = function() {
@@ -515,26 +572,61 @@ document.addEventListener("DOMContentLoaded", function () {
             errorThumb.innerHTML = '';
             const file = event.target.files[0];
             if (file) {
-                // Check if file size is okay (already done by you)
+                // Check file size
                 if (file.size > 2 * 1024 * 1024) {
                     errorThumb.innerHTML = '<li>Image is too large. Max allowed size is 2MB.</li>';
                     event.target.value = "";
                     return;
                 }
-                // Now validate if it is a real image
+                
+                // Check file type
+                const allowedTypes = ['image/jpeg', 'image/png', 'image/jp2'];
+                if (!allowedTypes.includes(file.type)) {
+                    errorThumb.innerHTML = '<li>Only JPG, JPEG2000, and PNG images are allowed.</li>';
+                    event.target.value = "";
+                    return;
+                }
+                
+                // Validate image dimensions
                 const img = new Image();
                 img.onload = function () {
-                    // File is a valid image, proceed
+                    const width = img.width;
+                    const height = img.height;
+                    
+                    // Dimension limits (same as backend)
+                    const MAX_WIDTH = 2048;
+                    const MAX_HEIGHT = 2048;
+                    const MIN_WIDTH = 50;
+                    const MIN_HEIGHT = 50;
+                    
+                    // Check maximum dimensions
+                    if (width > MAX_WIDTH || height > MAX_HEIGHT) {
+                        errorThumb.innerHTML = `<li>Image dimensions must not exceed ${MAX_WIDTH}x${MAX_HEIGHT} pixels. Current size: ${width}x${height}</li>`;
+                        event.target.value = "";
+                        return;
+                    }
+                    
+                    // Check minimum dimensions
+                    if (width < MIN_WIDTH || height < MIN_HEIGHT) {
+                        errorThumb.innerHTML = `<li>Image dimensions must be at least ${MIN_WIDTH}x${MIN_HEIGHT} pixels. Current size: ${width}x${height}</li>`;
+                        event.target.value = "";
+                        return;
+                    }
+                    
+                    // All validations passed - show success message
+                    errorThumb.innerHTML = `<li style="color: #10b981;">✓ Image validated successfully (${width}x${height} pixels)</li>`;
                 };
+                
                 img.onerror = function () {
                     errorThumb.innerHTML = '<li>The uploaded file is not a valid image or it\'s corrupted.</li>';
-                    thumbnailInput.value = "";
+                    event.target.value = "";
                 };
-                // Use object URL to check image validity
+                
+                // Use object URL to check image validity and dimensions
                 img.src = URL.createObjectURL(file);
-                }
-            });
-        }
+            }
+        });
+    }
 });
     </script>
 

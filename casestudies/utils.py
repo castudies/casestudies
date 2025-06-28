@@ -94,7 +94,6 @@ def send_approval_notification_to_user(case_study, request):
         The Casestudies Team
         """
         
-        print(f"Sending approval email to: {case_study.submitter_email}")
         
         send_mail(
             subject=f'Case Study Approved: {case_study.title}',
