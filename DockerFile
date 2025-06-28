@@ -15,5 +15,5 @@ COPY . .
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
-# ✅ Test if libmagic is working properly (optional)
+
 RUN python -c "import magic; print(magic.from_buffer(b'hello world'))"
