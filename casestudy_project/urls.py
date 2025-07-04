@@ -27,10 +27,34 @@ from django.views.static import serve
 from casestudies.models import CaseStudy
 from casestudies.views import custom_404
 
+
+
+from django.contrib.auth.models import User
+
+from django_otp.admin import OTPAdminSite
+from django_otp.plugins.otp_totp.models import TOTPDevice
+from django_otp.plugins.otp_totp.admin import TOTPDeviceAdmin
+
+
+class OTPAdmin(OTPAdminSite):
+
+      def has_permission(self, request):
+        return request.user.is_active and request.user.is_authenticated and request.user.otp_device
+
+
+# Create instance of custom admin site
+admin_site = OTPAdmin(name='OTPAdmin')
+
+# Copy all models already registered in default admin to your OTP admin
+for model, model_admin in admin.site._registry.items():
+    admin_site.register(model, model_admin.__class__)
+
+
+
 secret_admin_path = os.environ.get('SECRET_ADMIN_PATH')
 
 urlpatterns = [
-    path(f"{secret_admin_path}/", admin.site.urls),
+    path(f"{secret_admin_path}/", admin_site.urls),
     path('admin/', custom_404, name='admin_404'),
     path('', include('casestudies.urls')),
     path("ckeditor5/", include('django_ckeditor_5.urls')),
