@@ -54,7 +54,7 @@ for model, model_admin in admin.site._registry.items():
 secret_admin_path = os.environ.get('SECRET_ADMIN_PATH')
 
 urlpatterns = [
-    path(f"{secret_admin_path}/", admin.site.urls),
+    path(f"{secret_admin_path}/", admin_site.urls),
     path('admin/', custom_404, name='admin_404'),
     path('', include('casestudies.urls')),
     path("ckeditor5/", include('django_ckeditor_5.urls')),
